@@ -1,0 +1,24 @@
+:root {
+    --vanilla: #d4e09bff;
+    --light-yellow: #f6f4d2ff;
+    --tea-green: #cbdfbdff;
+    --atomic-tangerine: #f19c79ff;
+    --dark-purple: #36213eff;
+}
+
+html {
+    background-color: var(--tea-green);
+    border-style: solid;
+    border-color: var(--dark-purple);
+    border-width: 30px;
+}
+
+.muffin {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+}
+
+.muffin_image {
+    width: 50%;
+}

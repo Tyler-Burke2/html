@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Typing Clicker — Bright Adventure</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-ambient"></div>
+
+  <div class="container">
+    <main class="left-panel" tabindex="0" aria-label="Typing area">
+      <div class="stage card">
+        <header class="stage-header">
+          <div class="brand">
+            <img src="placeholder-big.png" alt="" class="brand-img placeholder-img">
+            <div>
+              <h1>Typing Clicker</h1>
+              <p class="subtitle">Bright Adventure — hit words before they escape!</p>
+            </div>
+          </div>
+
+          <div class="hud">
+            <div class="hud-item">
+              <img src="placeholder-coin.png" alt="" class="coin-icon placeholder-img">
+              <div>
+                <div class="label">Dollars</div>
+                <div id="dollars" class="big-num">0</div>
+              </div>
+            </div>
+
+            <div class="hud-item combo-box">
+              <div class="label">Combo</div>
+              <div id="combo" class="combo-num">0</div>
+              <div id="multiplier" class="multiplier">1.00×</div>
+            </div>
+
+            <div class="hud-controls">
+              <button id="open-menu" class="btn small">Menu</button>
+              <button id="audio-toggle" class="btn small alt">Music</button>
+            </div>
+          </div>
+        </header>
+
+        <section id="play-area" class="play-area" aria-live="polite">
+          <!-- moving word elements will be injected here -->
+        </section>
+
+        <div class="controls">
+          <div class="hint">Type anywhere — press <strong>Enter</strong> to submit. Backspace edits. Esc clears.</div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="right-panel">
+      <div class="card shop-card">
+        <h2>Shop</h2>
+        <p class="muted">Buy upgrades to boost $ per word or combo power. (No auto-typing.)</p>
+        <div id="upgrades" class="upgrades"></div>
+        <div class="shop-footer">
+          <button id="reset-progress" class="btn danger">Reset</button>
+        </div>
+      </div>
+
+      <div class="card stats-card">
+        <h3>Stats</h3>
+        <div class="stat"><div class="stat-label">Per Word</div><div id="per-word" class="stat-value">1</div></div>
+        <div class="stat"><div class="stat-label">Multiplier</div><div id="combo-mult" class="stat-value">1.00</div></div>
+        <div class="muted small">Placeholders: <code>placeholder-big.png</code>, <code>placeholder-coin.png</code>, <code>images/upgrade-*.png</code></div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- floating +$ container -->
+  <div id="floating-container" aria-hidden="true"></div>
+
+  <!-- Menu modal -->
+  <div id="menu-modal" class="modal hidden" role="dialog" aria-hidden="true" aria-labelledby="menu-title">
+    <div class="modal-panel card">
+      <h3 id="menu-title">Game Menu</h3>
+      <div class="menu-actions">
+        <button id="manual-save" class="btn">Save Now</button>
+        <button id="manual-load" class="btn alt">Load</button>
+        <button id="export-save" class="btn alt">Export</button>
+        <button id="import-save" class="btn alt">Import</button>
+        <textarea id="import-area" class="import-area" placeholder="Paste save JSON here"></textarea>
+        <div class="menu-row">
+          <button id="close-menu" class="btn">Close</button>
+        </div>
+      </div>
+      <div class="muted small">Autosaves every 10s.</div>
+    </div>
+  </div>
+
+  <!-- Audio placeholders -->
+  <audio id="ambient-audio" loop preload="auto">
+    <source src="placeholder-ambient.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="type-sfx" preload="auto">
+    <source src="placeholder-typed.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="success-sfx" preload="auto">
+    <source src="placeholder-success.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

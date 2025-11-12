@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muffin Masher 🌟</title>
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<main class="stage">
+
+  <!-- HEADER -->
+  <header class="header">
+    <h1>Muffin Masher</h1>
+    <p class="subtitle">Mash muffins, earn upgrades, unlock achievements, and become legendary!</p>
+  </header>
+
+  <!-- GAME AREA -->
+  <section class="game">
+
+    <!-- Muffin Click Zone -->
+    <div class="muffin-zone">
+      <button id="muffinButton" class="muffin" aria-label="Mash muffin">
+        <span class="muffin-emoji" aria-hidden="true">🧁</span>
+        <span class="muffin-shadow"></span>
+      </button>
+      <div id="floatingEffects" class="floating-effects"></div>
+    </div>
+
+    <!-- HUD & Stats -->
+    <aside class="hud">
+      <div class="scoreboard">
+        <div class="score">Muffins: <span id="score" aria-live="polite">0</span></div>
+        <div class="per-second">Per second: <span id="perSecond">0</span></div>
+      </div>
+
+      <!-- Upgrades -->
+      <section class="upgrades" aria-label="Upgrades">
+        <h2>Upgrades</h2>
+        <div class="upgrade-list"></div>
+        <div class="controls">
+          <button id="saveBtn" class="control-btn">💾 Save</button>
+          <button id="resetBtn" class="control-btn">🔄 Reset</button>
+        </div>
+      </section>
+
+      <!-- Achievements -->
+      <section class="achievements" aria-label="Achievements">
+        <h2>Achievements</h2>
+        <ul id="achievementList" class="achievement-list">
+          <!-- Dynamically populated -->
+        </ul>
+      </section>
+    </aside>
+
+  </section>
+
+  <!-- NOTIFICATIONS -->
+  <div id="notifications" class="notifications"></div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <small>Built for fun, practice, and maximum muffin madness! 🍰</small>
+  </footer>
+
+</main>
+
+<script src="js/index.js"></script>
+</body>
+</html>
