@@ -111,10 +111,12 @@ h1 { margin:0; font-weight:800; font-size:20px; color:var(--text); }
   display:flex;
   align-items:center;
   justify-content:flex-start;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  background-image: url("images/back.png");
+  background-size: cover;
+  border: 5px solid var(--bg-a);
   border-radius:14px;
   margin-top:6px;
-  border: 1px solid rgba(61,224,255,0.06);
+  /* border: 1px solid rgba(61,224,255,0.06); */
   box-shadow: inset 0 -20px 60px rgba(2,6,23,0.25);
   transition: box-shadow 0.2s ease-out;
 }

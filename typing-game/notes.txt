@@ -2,3 +2,4 @@ reset button with a screen to confirm that action in the menu
 animation with the letters needs to be in the middle of the screen
 add a header and a footer
 weird color bar where the footer would be if there was one.
+For some reason there's no golden words any more or the upgrade for it

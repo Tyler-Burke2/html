@@ -20,10 +20,10 @@ let state = {
   dollars: 0,
   basePerWord: 1,
   upgrades: [
-    { id: 'plus1', name: '+1 $/word', desc: 'Add +1 dollar per word', baseCost: 25, add: 1, level: 0, img: 'images/upgrade-plus1.png' },
-    { id: 'plus3', name: '+3 $/word', desc: 'Add +3 dollars per word', baseCost: 110, add: 3, level: 0, img: 'images/upgrade-plus3.png' },
-    { id: 'combo', name: 'Combo Mastery', desc: 'Increase combo multiplier slightly', baseCost: 260, add: 0, level: 0, img: 'images/upgrade-combo.png' },
-    { id: 'combo-step', name: 'Combo Accelerator', desc: 'Each level adds +0.1 to combo growth per word', baseCost: 200, add: 0.1, level: 0, img: 'images/upgrade-combo-step.png' }
+    { id: 'plus1', name: '+1 $/word', desc: 'Add +1 dollar per word', baseCost: 25, add: 1, level: 0, img: 'images/icon_stack_2.png' },
+    { id: 'plus3', name: '+3 $/word', desc: 'Add +3 dollars per word', baseCost: 110, add: 3, level: 0, img: 'images/icon_stack_2.png' },
+    { id: 'combo', name: 'Combo Mastery', desc: 'Increase combo multiplier slightly', baseCost: 260, add: 0, level: 0, img: 'images/icon_stack_2.png' },
+    { id: 'combo-step', name: 'Combo Accelerator', desc: 'Each level adds +0.1 to combo growth per word', baseCost: 200, add: 0.1, level: 0, img: 'images/icon_stack_2.png' }
   ],
   words: [],
   activeWordEl: null,
