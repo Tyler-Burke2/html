@@ -47,7 +47,7 @@
           </div>
         </header>
 
-        <section id="play-area" class="play-area" aria-live="polite">
+        <section id="play-area" class="play-area" aria-live="polite" aria-label="Play area">
           <!-- moving word elements will be injected here -->
         </section>
 
@@ -61,7 +61,7 @@
       <div class="card shop-card">
         <h2>Shop</h2>
         <p class="muted">Buy upgrades to boost $ per word or combo power. (No auto-typing.)</p>
-        <div id="upgrades" class="upgrades"></div>
+        <div id="upgrades" class="upgrades" aria-live="polite"></div>
         <div class="shop-footer">
           <button id="reset-progress" class="btn danger">Reset</button>
         </div>
@@ -80,15 +80,16 @@
   <div id="floating-container" aria-hidden="true"></div>
 
   <!-- Menu modal -->
-  <div id="menu-modal" class="modal hidden" role="dialog" aria-hidden="true" aria-labelledby="menu-title">
-    <div class="modal-panel card">
+  <div id="menu-modal" class="modal hidden" role="dialog" aria-hidden="true" aria-labelledby="menu-title" aria-modal="true">
+    <div class="modal-panel card" role="document">
       <h3 id="menu-title">Game Menu</h3>
       <div class="menu-actions">
         <button id="manual-save" class="btn">Save Now</button>
         <button id="manual-load" class="btn alt">Load</button>
         <button id="export-save" class="btn alt">Export</button>
         <button id="import-save" class="btn alt">Import</button>
-        <textarea id="import-area" class="import-area" placeholder="Paste save JSON here"></textarea>
+        <!-- kept class import-area for styling/expansion in CSS -->
+        <textarea id="import-area" class="import-area" placeholder="Paste save JSON here" aria-label="Import or export save JSON"></textarea>
         <div class="menu-row">
           <button id="close-menu" class="btn">Close</button>
         </div>
