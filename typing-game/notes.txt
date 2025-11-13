@@ -1,0 +1,6 @@
+padding between the word shop and the the upgrades menu when at half size and also weird color thing at half size with the shop div
+animation when a wrong word is spelt is laggy sometimes
+Letter animation needs to be bigger and more visible to the player
+export and import box needs to get bigger when a player clicks on
+I also don't like that the menu screen is transparent
+Upgrade for more golden words and get rid of +3 $/word upgrade
