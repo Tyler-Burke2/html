@@ -1,19 +1,19 @@
-/* script.js - FIXED VERSION
-   Fixes:
-   - Removed duplicate function definitions
-   - Consolidated menu handlers
-   - Fixed spawn race condition with processing flag
-   - Clarified golden word bonus calculation
-   - Improved code organization
+/* script.js - updated to match requested features:
+   - Header/footer (HTML/CSS)
+   - Reset moved to menu with custom confirm modal
+   - Huge center explosion on miss / wrong entry (style B: explode then fade)
+   - Floating +$ animation slowed 3x
+   - Golden words fixed at 5% chance and give 3x reward
+   - Background and layout fixes to avoid fullscreen bar
 */
 
 const DEFAULT_WORDS = ["temple","wilds","ancient","compass","whisper","starlight","meadow","journey","sapphire","summit","lantern","quest","guardian","voyage","echo","timber","harbor","mystic","horizon","sanctum"];
 const SAVE_KEY = 'typing-clicker-bright-v1';
 const AUTOSAVE_INTERVAL_MS = 10000;
 const WORD_DURATION_MS = 6000;
-const SPEED_OFF_FACTOR = 3;
-const BASE_MULTIPLIER_STEP = 0.1;
-const MULTIPLIER_MAX = 5.0;
+
+/* fixed 5% golden chance as requested */
+const GOLDEN_CHANCE = 0.05;
 
 // State
 let state = {
@@ -33,7 +33,7 @@ let state = {
   lastCorrect: 0,
   autosaveTimeout: null,
   ambientOn: false,
-  isProcessing: false // NEW: prevent spawn overlap during submission
+  isProcessing: false
 };
 
 // DOM
@@ -55,7 +55,11 @@ const manualLoadBtn = document.getElementById('manual-load');
 const exportBtn = document.getElementById('export-save');
 const importBtn = document.getElementById('import-save');
 const importArea = document.getElementById('import-area');
-const resetBtn = document.getElementById('reset-progress');
+const menuResetBtn = document.getElementById('menu-reset');
+
+const confirmModal = document.getElementById('confirm-modal');
+const confirmYes = document.getElementById('confirm-reset-yes');
+const confirmNo = document.getElementById('confirm-reset-no');
 
 const ambientAudio = document.getElementById('ambient-audio');
 const typeSfx = document.getElementById('type-sfx');
@@ -67,7 +71,7 @@ function now(){ return Date.now(); }
 function fmt(n){ return Math.floor(n); }
 function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-// Load external words.json
+// Load external words.json if present
 async function loadWords(){
   try {
     const r = await fetch('words.json', {cache: "no-store"});
@@ -87,6 +91,9 @@ function calcPerWord(){
   });
   return per;
 }
+
+const BASE_MULTIPLIER_STEP = 0.1;
+const MULTIPLIER_MAX = 5.0;
 
 function getEffectiveComboStep(){
   let step = BASE_MULTIPLIER_STEP;
@@ -125,7 +132,7 @@ async function spawnWord(){
   if(!state.words || state.words.length === 0) state.words = DEFAULT_WORDS.slice();
 
   const word = state.words[Math.floor(Math.random()*state.words.length)];
-  const isGolden = (Math.random() < 0.05);
+  const isGolden = (Math.random() < GOLDEN_CHANCE);
 
   const el = document.createElement('div');
   el.className = 'moving-word';
@@ -144,12 +151,10 @@ async function spawnWord(){
   const measuredWidth = el.offsetWidth || wordBubble.offsetWidth || 120;
 
   if(isGolden){
-    wordBubble.style.background = 'linear-gradient(90deg,#fff7d6,#ffd166)';
-    wordBubble.style.color = '#331900';
-    wordBubble.style.border = '1px solid rgba(255,209,102,0.85)';
-    wordBubble.style.boxShadow = '0 16px 44px rgba(255,209,102,0.12), 0 0 18px rgba(255,209,102,0.18)';
+    wordBubble.classList.add('golden');
   }
 
+  // start at right edge and move left (same behavior as before)
   el.style.left = areaWidth + 'px';
   el.style.top = '50%';
   el.style.transform = 'translateY(-50%)';
@@ -171,6 +176,10 @@ async function spawnWord(){
 
   anim.onfinish = () => {
     if(document.body.contains(el) && el.dataset.handled === '0'){
+      // word escaped -> miss
+      // keep the red border logic intact (external code or CSS triggers it elsewhere)
+      flashPlayAreaBorder(); // we keep red border
+      playHugeCenterExplosion(el.dataset.word || '');
       handleMiss(el, word);
     }
   };
@@ -242,7 +251,7 @@ function submitActive(){
 
     state.dollars += Math.max(1, gained);
     updateHUD();
-    spawnFloating(`+${gained} $`, el);
+    spawnFloating(`+${gained} $`, el); // this floating will be slowed by 3x inside spawnFloating
 
     try{ successSfx && successSfx.play().catch(()=>{}); }catch{}
 
@@ -252,19 +261,22 @@ function submitActive(){
     if(el.dataset.golden === '1'){
       spawnGoldenParticlesAtElement(el, 18);
       bubble && (bubble.style.transform = 'scale(1.04)');
-      setTimeout(()=> { if(bubble) bubble.style.transform = ''; }, 300);
+      setTimeout(()=> { if(bubble) bubble.style.transform = ''; }, 400);
     }
 
+    // Create a subtle success exit (we'll simply fade and remove slower so user sees +$)
     if(anim){
       try{
-        anim.playbackRate = SPEED_OFF_FACTOR;
+        // make the remaining movement quick so the explosion doesn't collide visually
+        anim.playbackRate = 1.8;
       } catch(e){
-        anim.cancel();
+        try{ anim.cancel(); }catch{}
         const endLeft = - (el.offsetWidth || 120) - 8;
+        const currentLeft = parseFloat(getComputedStyle(el).left) || 0;
         const fast = el.animate([
-          { left: getComputedStyle(el).left || '0px' },
+          { left: currentLeft + 'px' },
           { left: endLeft + 'px' }
-        ], { duration: Math.max(120, WORD_DURATION_MS / SPEED_OFF_FACTOR), easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
+        ], { duration: 300, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
         fast.onfinish = () => cleanupActive(el, true);
       }
       anim.onfinish = () => cleanupActive(el, true);
@@ -287,6 +299,10 @@ function submitActive(){
     feedback('Wrong — combo reset', 'crimson');
 
     try{ if(anim) anim.cancel(); } catch(e){}
+    // Keep red border behavior as-is
+    flashPlayAreaBorder();
+    // play the huge center explosion for missed/wrong event (style B: explode then fade)
+    playHugeCenterExplosion(target || el.dataset.word || '');
     handleMiss(el, el.dataset.word, true);
   }
 }
@@ -298,12 +314,15 @@ function handleMiss(el, word, force=false){
   const bubble = el.querySelector('.word-bubble');
   const text = word || (el.dataset && el.dataset.word) || '';
 
+  // Hide bubble so explosion is visible
+  if(bubble) bubble.style.visibility = 'hidden';
+
+  // small pieces fallback (kept but the major explosion is handled by playHugeCenterExplosion)
   const bubbleRect = bubble ? bubble.getBoundingClientRect() : el.getBoundingClientRect();
   const containerRect = playArea.getBoundingClientRect();
 
-  if(bubble) bubble.style.visibility = 'hidden';
-
-  for(let i=0;i<text.length;i++){
+  // quick small scatter to avoid abruptness
+  for(let i=0;i<Math.min(6, text.length);i++){
     const p = document.createElement('div');
     p.className = 'piece';
     p.textContent = text[i];
@@ -315,9 +334,9 @@ function handleMiss(el, word, force=false){
     p.style.top = startTop + 'px';
 
     const angle = (Math.random()*Math.PI*2);
-    const dist = 60 + Math.random()*140;
+    const dist = 40 + Math.random()*80;
     const dx = Math.cos(angle) * dist;
-    const dy = Math.sin(angle) * dist - 30;
+    const dy = Math.sin(angle) * dist - 20;
     p.animate([
       { transform: 'translate(0,0) rotate(0deg)', opacity:1 },
       { transform: `translate(${dx}px, ${dy}px) rotate(${(Math.random()*360-180)}deg)`, opacity:0 }
@@ -330,8 +349,7 @@ function handleMiss(el, word, force=false){
     typedLine.animate([{ opacity:1 }, { opacity:0 }], { duration:500, fill:'forwards' });
   }
 
-  flashPlayAreaBorder();
-
+  // ensure HUD updated and allow new spawns
   state.combo = 0;
   state.lastCorrect = 0;
   updateHUD();
@@ -340,9 +358,9 @@ function handleMiss(el, word, force=false){
     if(document.body.contains(el)) el.remove();
     if(state.activeWordEl === el) state.activeWordEl = null;
     state.activeAnimation = null;
-    state.isProcessing = false; // Allow new spawns
-    setTimeout(()=> spawnWord(), 300);
-  }, 650);
+    state.isProcessing = false;
+    setTimeout(()=> spawnWord(), 380);
+  }, 780);
 }
 
 function cleanupActive(el, wasSuccess){
@@ -353,12 +371,58 @@ function cleanupActive(el, wasSuccess){
     if(document.body.contains(el)) el.remove();
     if(state.activeWordEl === el) state.activeWordEl = null;
     state.activeAnimation = null;
-    state.isProcessing = false; // Allow new spawns
-    setTimeout(()=> spawnWord(), 260);
-  }, 260);
+    state.isProcessing = false;
+    setTimeout(()=> spawnWord(), 320);
+  }, 320);
 }
 
-/* ---------- Floating text ---------- */
+/* ---------- Huge center explosion (style B: explode then fade) ---------- */
+function playHugeCenterExplosion(text){
+  if(!playArea) return;
+  const containerRect = playArea.getBoundingClientRect();
+  const cx = containerRect.width / 2;
+  const cy = containerRect.height / 2;
+
+  // Create many large center pieces using the letters of the word
+  const letters = String(text || '').split('');
+  const count = Math.max(10, (letters.length * 2)); // create a lot for "HUGE"
+  for(let i=0;i<count;i++){
+    const ch = letters.length ? letters[i % letters.length] : String.fromCharCode(65 + (i % 26));
+    const p = document.createElement('div');
+    p.className = 'center-piece-large';
+    p.textContent = ch;
+    // large font (scale with viewport a bit for dramatic effect)
+    p.style.fontSize = Math.min(220, Math.max(140, Math.round(containerRect.width * 0.12))) + 'px';
+    // goldenish color if any letter was golden? (we can't detect per-letter here, but brighten occasionally)
+    if(Math.random() < 0.08) p.classList.add('golden');
+
+    playArea.appendChild(p);
+
+    // center positioning relative to playArea
+    p.style.left = cx + 'px';
+    p.style.top = cy + 'px';
+    p.style.transform = 'translate(-50%,-50%) scale(1)';
+    p.style.opacity = '1';
+
+    // spread outward, rotate and fade
+    const angle = (Math.random()*Math.PI*2);
+    const dist = 140 + Math.random()*320; // large distances for "huge" effect
+    const dx = Math.cos(angle) * dist;
+    const dy = Math.sin(angle) * dist - (Math.random()*40);
+    const rotate = (Math.random()*360-180);
+    const dur = 900 + Math.random()*900; // 0.9s - 1.8s
+
+    const keyframes = [
+      { transform: 'translate(-50%,-50%) scale(1) rotate(0deg)', opacity:1 },
+      { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.4) rotate(${rotate}deg)`, opacity:0 }
+    ];
+
+    p.animate(keyframes, { duration: dur, easing: 'cubic-bezier(.2,.8,.2,1)' })
+     .onfinish = () => p.remove();
+  }
+}
+
+/* ---------- Floating text (+$) slowed 3x ---------- */
 function spawnFloating(text, nearEl=null){
   const el = document.createElement('div');
   el.className = 'floating';
@@ -366,14 +430,17 @@ function spawnFloating(text, nearEl=null){
   Object.assign(el.style, {
     position: 'absolute',
     fontWeight: 800,
-    color: '#b85b00',
+    color: '#ffd166',
     pointerEvents: 'none',
-    zIndex: 70,
-    opacity: '1'
+    zIndex: 200,
+    opacity: '1',
+    transform: 'translate(-50%, 0)'
   });
 
+  // position relative to viewport, but we want it to appear near the element when available
   if(nearEl && nearEl.getBoundingClientRect){
     const rect = nearEl.getBoundingClientRect();
+    // convert to absolute coordinates within the viewport
     el.style.left = (rect.left + rect.width/2) + 'px';
     el.style.top  = (rect.top + rect.height/2 - 18) + 'px';
   } else {
@@ -382,16 +449,22 @@ function spawnFloating(text, nearEl=null){
   }
 
   floatingContainer.appendChild(el);
+
+  // original durations were ~900-1200ms; slow by 3x as requested
+  const baseDuration = 900 + Math.random()*300;
+  const dur = baseDuration * 3; // 3x slower
+
   const anim = el.animate([
-    { transform: 'translateY(0)', opacity: 1 },
-    { transform: 'translateY(-70px)', opacity: 0 }
-  ], { duration: 900 + Math.random()*200, easing: 'cubic-bezier(.2,.8,.2,1)'});
+    { transform: 'translate(-50%, 0) scale(1)', opacity: 1 },
+    { transform: 'translate(-50%, -140px) scale(1.08)', opacity: 0 }
+  ], { duration: dur, easing: 'cubic-bezier(.2,.8,.2,1)'});
   anim.onfinish = ()=> el.remove();
 }
 
 /* ---------- Input handling ---------- */
 window.addEventListener('keydown', (e) => {
-  if(!menuModal.classList.contains('hidden')) return;
+  // if menu or confirm modal is open, ignore typing
+  if(!menuModal.classList.contains('hidden') || !confirmModal.classList.contains('hidden')) return;
 
   if(e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey){
     state.typed += e.key;
@@ -404,6 +477,7 @@ window.addEventListener('keydown', (e) => {
   } else if(e.key === 'Enter'){
     submitActive();
   } else if(e.key === 'Escape'){
+    // clear typed
     state.typed = '';
     renderTypedForActive();
   }
@@ -510,17 +584,39 @@ function importSaveFromArea(){
   } 
 }
 
-function resetProgress(){ 
-  if(!confirm('Reset all progress?')) return; 
+function doResetAll(){
   state.dollars = 0; 
   state.basePerWord = 1; 
   state.upgrades.forEach(u=>u.level=0); 
   state.combo = 0; 
   state.lastCorrect = 0; 
+  try{ localStorage.removeItem(SAVE_KEY); }catch(e){}
   saveToLocal(); 
   updateHUD(); 
-  feedback('Progress reset'); 
+  feedback('Progress reset');
 }
+
+/* ---------- Reset handlers (menu) ---------- */
+function openConfirmReset(){
+  confirmModal.classList.remove('hidden');
+  confirmModal.setAttribute('aria-hidden','false');
+}
+function closeConfirmReset(){
+  confirmModal.classList.add('hidden');
+  confirmModal.setAttribute('aria-hidden','true');
+}
+
+menuResetBtn?.addEventListener('click', ()=> {
+  openConfirmReset();
+});
+confirmNo.addEventListener('click', ()=> {
+  closeConfirmReset();
+});
+confirmYes.addEventListener('click', ()=> {
+  closeConfirmReset();
+  closeMenu();
+  doResetAll();
+});
 
 /* ---------- Feedback ---------- */
 function feedback(msg, color=''){
@@ -533,9 +629,9 @@ function feedback(msg, color=''){
   fb.style.color = '#fff';
   fb.style.padding = '8px 12px';
   fb.style.borderRadius = '8px';
-  fb.style.zIndex = 200;
+  fb.style.zIndex = 500;
   document.body.appendChild(fb);
-  setTimeout(()=> fb.animate([{opacity:1},{opacity:0}], {duration:600}).onfinish = ()=> fb.remove(), 900);
+  setTimeout(()=> fb.animate([{opacity:1},{opacity:0}], {duration:600}).onfinish = ()=> fb.remove(), 1200);
 }
 
 /* ---------- Autosave ---------- */
@@ -551,19 +647,16 @@ function openMenu(){
   menuModal.classList.remove('hidden'); 
   menuModal.setAttribute('aria-hidden','false'); 
 }
-
 function closeMenu(){ 
   menuModal.classList.add('hidden'); 
   menuModal.setAttribute('aria-hidden','true'); 
 }
-
 openMenuBtn.addEventListener('click', openMenu);
 closeMenuBtn.addEventListener('click', closeMenu);
 manualSaveBtn.addEventListener('click', ()=>{ saveToLocal(); feedback('Saved'); });
 manualLoadBtn.addEventListener('click', ()=>{ const ok = loadFromLocal(); feedback(ok ? 'Loaded' : 'No save found'); });
 exportBtn.addEventListener('click', exportSave);
 importBtn.addEventListener('click', importSaveFromArea);
-resetBtn.addEventListener('click', resetProgress);
 
 /* ---------- Audio toggle ---------- */
 audioToggleBtn.addEventListener('click', ()=>{
@@ -575,17 +668,9 @@ audioToggleBtn.addEventListener('click', ()=>{
 
 /* ---------- Visual effects ---------- */
 function flashPlayAreaBorder(){
-  const prevBoxShadow = playArea.style.boxShadow;
-  playArea.animate([
-    { boxShadow: '0 0 0 0 rgba(255,0,0,0.0)' },
-    { boxShadow: '0 0 18px 6px rgba(255,0,0,0.85)' },
-    { boxShadow: '0 0 0 0 rgba(255,0,0,0.0)' }
-  ], { duration: 420, easing: 'ease-out' });
-  playArea.style.outline = '3px solid rgba(255,0,0,0.65)';
-  setTimeout(()=> { 
-    playArea.style.outline = ''; 
-    playArea.style.boxShadow = prevBoxShadow || ''; 
-  }, 420);
+  // keep red border behavior intact (flash quickly)
+  playArea.classList.add('flash-border');
+  setTimeout(()=> playArea.classList.remove('flash-border'), 700);
 }
 
 function spawnGoldenParticlesAtElement(el, count=12){
@@ -606,7 +691,7 @@ function spawnGoldenParticlesAtElement(el, count=12){
     p.style.height = '8px';
     p.style.borderRadius = '50%';
     p.style.pointerEvents = 'none';
-    p.style.zIndex = 80;
+    p.style.zIndex = 180;
     p.style.background = (i%2===0) ? '#ffd166' : '#fff7d6';
     playArea.appendChild(p);
 
@@ -637,5 +722,5 @@ init();
 
 // Debug access
 window._typingClicker = {
-  state, spawnWord, saveToLocal, loadFromLocal, exportSave, importSaveFromArea, resetProgress
+  state, spawnWord, saveToLocal, loadFromLocal, exportSave, importSaveFromArea, doResetAll
 };

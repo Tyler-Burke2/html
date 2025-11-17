@@ -7,96 +7,138 @@
 
   <!-- New font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- full-width header -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <div class="header-brand">
+        <img src="images/icon_stack_2.png" alt="" class="brand-img placeholder-img">
+        <div>
+          <strong>Typing Clicker</strong>
+        </div>
+      </div>
+      <nav>
+        <!-- placeholder link -->
+        <a href="#" class="header-link" id="placeholder-link" aria-label="Placeholder link for external site">Visit Site</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ambient background layers (fixed) -->
   <div class="bg-ambient" aria-hidden="true"></div>
 
-  <div class="container">
-    <main class="left-panel" tabindex="0" aria-label="Typing area">
-      <div class="stage card">
-        <header class="stage-header">
-          <div class="brand">
-            <img src="images/icon_stack_2.png" alt="" class="brand-img placeholder-img">
-            <div>
-              <h1>Typing Clicker</h1>
-              <p class="subtitle">Space Adventure — hit words before they escape!</p>
-            </div>
-          </div>
-
-          <div class="hud">
-            <div class="hud-item">
-              <img src="images/icon_stack_2.png" alt="" class="coin-icon placeholder-img">
+  <main class="site-main" role="main">
+    <div class="container">
+      <main class="left-panel" tabindex="0" aria-label="Typing area">
+        <div class="stage card">
+          <header class="stage-header">
+            <div class="brand">
+              <img src="images/icon_stack_2.png" alt="" class="brand-img placeholder-img">
               <div>
-                <div class="label">Dollars</div>
-                <div id="dollars" class="big-num">0</div>
+                <h1>Typing Clicker</h1>
+                <p class="subtitle">Space Adventure — hit words before they escape!</p>
               </div>
             </div>
 
-            <div class="hud-item combo-box">
-              <div class="label">Combo</div>
-              <div id="combo" class="combo-num">0</div>
-              <div id="multiplier" class="multiplier">1.00×</div>
-            </div>
+            <div class="hud">
+              <div class="hud-item">
+                <img src="images/icon_stack_2.png" alt="" class="coin-icon placeholder-img">
+                <div>
+                  <div class="label">Dollars</div>
+                  <div id="dollars" class="big-num">0</div>
+                </div>
+              </div>
 
-            <div class="hud-controls">
-              <button id="open-menu" class="btn small">Menu</button>
-              <button id="audio-toggle" class="btn small alt">Music</button>
+              <div class="hud-item combo-box">
+                <div class="label">Combo</div>
+                <div id="combo" class="combo-num">0</div>
+                <div id="multiplier" class="multiplier">1.00×</div>
+              </div>
+
+              <div class="hud-controls">
+                <button id="open-menu" class="btn small">Menu</button>
+                <button id="audio-toggle" class="btn small alt">Music</button>
+              </div>
             </div>
+          </header>
+
+          <section id="play-area" class="play-area" aria-live="polite" aria-label="Play area">
+            <!-- moving word elements will be injected here -->
+          </section>
+
+          <div class="controls">
+            <div class="hint">Type anywhere — press <strong>Enter</strong> to submit. Backspace edits. Esc clears.</div>
           </div>
-        </header>
-
-        <section id="play-area" class="play-area" aria-live="polite" aria-label="Play area">
-          <!-- moving word elements will be injected here -->
-        </section>
-
-        <div class="controls">
-          <div class="hint">Type anywhere — press <strong>Enter</strong> to submit. Backspace edits. Esc clears.</div>
         </div>
-      </div>
-    </main>
+      </main>
 
-    <aside class="right-panel">
-      <div class="card shop-card">
-        <h2>Shop</h2>
-        <p class="muted">Buy upgrades to boost $ per word or combo power. (No auto-typing.)</p>
-        <div id="upgrades" class="upgrades" aria-live="polite"></div>
-        <div class="shop-footer">
-          <button id="reset-progress" class="btn danger">Reset</button>
+      <aside class="right-panel" aria-label="Shop and stats">
+        <div class="card shop-card">
+          <h2>Shop</h2>
+          <p class="muted">Buy upgrades to boost $ per word or combo power. (No auto-typing.)</p>
+          <div id="upgrades" class="upgrades" aria-live="polite"></div>
+          <div class="shop-footer muted small">Reset moved to Menu</div>
         </div>
-      </div>
 
-      <div class="card stats-card">
-        <h3>Stats</h3>
-        <div class="stat"><div class="stat-label">Per Word</div><div id="per-word" class="stat-value">1</div></div>
-        <div class="stat"><div class="stat-label">Multiplier</div><div id="combo-mult" class="stat-value">1.00</div></div>
-        <div class="muted small">Placeholders: <code>placeholder-big.png</code>, <code>placeholder-coin.png</code>, <code>images/upgrade-*.png</code></div>
-      </div>
-    </aside>
-  </div>
+        <div class="card stats-card">
+          <h3>Stats</h3>
+          <div class="stat"><div class="stat-label">Per Word</div><div id="per-word" class="stat-value">1</div></div>
+          <div class="stat"><div class="stat-label">Multiplier</div><div id="combo-mult" class="stat-value">1.00</div></div>
+          <div class="muted small">Placeholders: <code>placeholder-big.png</code>, <code>placeholder-coin.png</code>, <code>images/upgrade-*.png</code></div>
+        </div>
+      </aside>
+    </div>
+  </main>
 
   <!-- floating +$ container -->
   <div id="floating-container" aria-hidden="true"></div>
 
-  <!-- Menu modal -->
+  <!-- Menu modal (includes Reset Progress button) -->
   <div id="menu-modal" class="modal hidden" role="dialog" aria-hidden="true" aria-labelledby="menu-title" aria-modal="true">
     <div class="modal-panel card" role="document">
       <h3 id="menu-title">Game Menu</h3>
       <div class="menu-actions">
-        <button id="manual-save" class="btn">Save Now</button>
-        <button id="manual-load" class="btn alt">Load</button>
-        <button id="export-save" class="btn alt">Export</button>
-        <button id="import-save" class="btn alt">Import</button>
+        <div class="menu-row">
+          <button id="manual-save" class="btn">Save Now</button>
+          <button id="manual-load" class="btn alt">Load</button>
+          <button id="export-save" class="btn alt">Export</button>
+          <button id="import-save" class="btn alt">Import</button>
+        </div>
+
         <!-- kept class import-area for styling/expansion in CSS -->
         <textarea id="import-area" class="import-area" placeholder="Paste save JSON here" aria-label="Import or export save JSON"></textarea>
-        <div class="menu-row">
+
+        <div class="menu-row" style="margin-top:12px;">
+          <!-- Menu Reset moved here -->
+          <button id="menu-reset" class="btn danger">Reset Progress</button>
           <button id="close-menu" class="btn">Close</button>
         </div>
       </div>
       <div class="muted small">Autosaves every 10s.</div>
     </div>
   </div>
+
+  <!-- Confirm Reset modal (custom) -->
+  <div id="confirm-modal" class="modal hidden" role="dialog" aria-hidden="true" aria-labelledby="confirm-title" aria-modal="true">
+    <div class="modal-panel card" role="document">
+      <h3 id="confirm-title">Confirm Reset</h3>
+      <p>Are you sure you want to reset all progress? This cannot be undone.</p>
+      <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:12px;">
+        <button id="confirm-reset-no" class="btn alt">Cancel</button>
+        <button id="confirm-reset-yes" class="btn danger">Yes, reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- full-width footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div>© Typing Clicker</div>
+      <div class="muted small">Made with ✨</div>
+    </div>
+  </footer>
 
   <!-- Audio placeholders -->
   <audio id="ambient-audio" loop preload="auto">
