@@ -1,15 +1,1 @@
-reset button with a screen to confirm that action in the menu
-animation with the letters needs to be in the middle of the screen
-add a header and a footer
-weird color bar where the footer would be if there was one.
-For some reason there's no golden words any more or the upgrade for it
-slow down the animation that plays everytime you type a word correctly (the one that does +$20)
-
-#1) I want there to be a reset button with a screen that pops up to confirm the action when clicked on the menu.
-#2) I want the animation with the letters that plays along with the red border animation to be much larger and appear in the middle of the screen instead of on the side.
-#3) I need a header and a footer. In the header, put a place holder for a link that will go to another site
-#4) There is a weird bar of color on the bottom of the screen when the screen is in fullscreen that is where the footer would be if it was currently there. The background should be the same everywhere except for when you put a header and footer in. Those parts can be a darker shade of the background color
-#5) I don't think there are golden words appearing anymore and I want to make sure that they still appear about 5-10% of the time and should still give triple amount of money.
-#6) Slow down the animation that plays when you type a word correctly (the one that does +$20 for example).
-
-Before you recode anything, ask me any questions that you have and also I want you to paste the whole code down for me again so that I can just copy and paste the whole thing into vs code
+weird color bar where the footer is

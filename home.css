@@ -1,0 +1,95 @@
+:root {
+    --bg: #0d0d0d;
+    --panel: #141414;
+    --accent: #ffb347;
+    --accent2: #ffd47e;
+    --text: #f8f8f8;
+}
+
+body {
+    margin: 0;
+    font-family: "Roboto Mono", monospace;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+}
+
+header,
+footer {
+    padding: 16px 0;
+    background: var(--panel);
+    border-bottom: 2px solid #1f1f1f;
+}
+
+footer {
+    margin-top: auto;
+    border-top: 2px solid #1f1f1f;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 6px;
+}
+
+nav a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    color: var(--accent2);
+    text-shadow: 0 0 8px var(--accent2);
+}
+
+h1 {
+    margin-top: 90px;
+    font-size: 2.6rem;
+    letter-spacing: 2px;
+    color: var(--accent2);
+    text-shadow: 0 0 12px var(--accent);
+}
+
+p {
+    margin-top: 20px;
+    opacity: 0.8;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+}
+
+.btn-box {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.game-btn {
+    background: var(--panel);
+    padding: 14px 26px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    color: var(--accent);
+    font-weight: 700;
+    border: 2px solid var(--accent);
+    text-decoration: none;
+    transition: 0.25s;
+}
+
+.game-btn:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent2);
+    color: var(--accent2);
+    box-shadow: 0 0 14px var(--accent2);
+}
