@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Typing Clicker – Space Adventure</title>
 
-  <!-- New font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- full-width header -->
+  <!-- ========== HEADER ========== -->
   <header class="site-header" role="banner">
     <div class="header-inner">
       <div class="header-brand">
@@ -20,19 +19,23 @@
         </div>
       </div>
       <nav>
-        <!-- placeholder link -->
         <a href="#" class="header-link" id="placeholder-link" aria-label="Placeholder link for external site">Visit Site</a>
       </nav>
     </div>
   </header>
 
-  <!-- ambient background layers (fixed) -->
+  <!-- ========== AMBIENT BACKGROUND ========== -->
   <div class="bg-ambient" aria-hidden="true"></div>
 
+  <!-- ========== MAIN CONTENT ========== -->
   <main class="site-main" role="main">
     <div class="container">
+      
+      <!-- LEFT PANEL: Game Stage -->
       <main class="left-panel" tabindex="0" aria-label="Typing area">
         <div class="stage card">
+          
+          <!-- Stage Header: Title + HUD -->
           <header class="stage-header">
             <div class="brand">
               <img src="images/icon_stack_2.png" alt="" class="brand-img placeholder-img">
@@ -64,16 +67,19 @@
             </div>
           </header>
 
+          <!-- Play Area: Where words appear and move -->
           <section id="play-area" class="play-area" aria-live="polite" aria-label="Play area">
             <!-- moving word elements will be injected here -->
           </section>
 
+          <!-- Controls Hint -->
           <div class="controls">
             <div class="hint">Type anywhere – press <strong>Enter</strong> to submit. Backspace edits. Esc clears.</div>
           </div>
         </div>
       </main>
 
+      <!-- RIGHT PANEL: Shop -->
       <aside class="right-panel" aria-label="Shop and stats">
         <div class="card shop-card">
           <h2>Shop</h2>
@@ -81,13 +87,14 @@
           <div id="upgrades" class="upgrades" aria-live="polite"></div>
         </div>
       </aside>
+      
     </div>
   </main>
 
-  <!-- floating +$ container -->
+  <!-- ========== FLOATING +$ CONTAINER ========== -->
   <div id="floating-container" aria-hidden="true"></div>
 
-  <!-- Menu modal (includes Reset Progress button) -->
+  <!-- ========== MENU MODAL ========== -->
   <div id="menu-modal" class="modal hidden" role="dialog" aria-hidden="true" aria-labelledby="menu-title" aria-modal="true">
     <div class="modal-panel card" role="document">
       <h3 id="menu-title">Game Menu</h3>
@@ -99,11 +106,9 @@
           <button id="import-save" class="btn alt">Import</button>
         </div>
 
-        <!-- kept class import-area for styling/expansion in CSS -->
         <textarea id="import-area" class="import-area" placeholder="Paste save JSON here" aria-label="Import or export save JSON"></textarea>
 
         <div class="menu-row" style="margin-top:12px;">
-          <!-- Stats and Reset buttons -->
           <button id="open-stats" class="btn alt">View Stats</button>
           <button id="menu-reset" class="btn danger">Reset Progress</button>
           <button id="close-menu" class="btn">Close</button>
@@ -113,7 +118,7 @@
     </div>
   </div>
 
-  <!-- Stats modal -->
+  <!-- ========== STATS MODAL ========== -->
   <div id="stats-modal" class="modal hidden" role="dialog" aria-hidden="true" aria-labelledby="stats-title" aria-modal="true">
     <div class="modal-panel card" role="document">
       <h3 id="stats-title">Stats</h3>
@@ -121,6 +126,7 @@
         <div class="stat"><div class="stat-label">Per Word</div><div id="per-word" class="stat-value">1</div></div>
         <div class="stat"><div class="stat-label">Golden Chance</div><div id="golden-chance" class="stat-value">5%</div></div>
         <div class="stat"><div class="stat-label">Combo Growth</div><div id="combo-growth" class="stat-value">0.10</div></div>
+        <div class="stat"><div class="stat-label">Max Multiplier</div><div id="max-mult" class="stat-value">5.00×</div></div>
       </div>
       <div style="margin-top:16px;">
         <button id="close-stats" class="btn">Close</button>
@@ -128,7 +134,7 @@
     </div>
   </div>
 
-  <!-- Confirm Reset modal (custom) -->
+  <!-- ========== CONFIRM RESET MODAL ========== -->
   <div id="confirm-modal" class="modal hidden" role="dialog" aria-hidden="true" aria-labelledby="confirm-title" aria-modal="true">
     <div class="modal-panel card confirm-panel" role="document">
       <h3 id="confirm-title">Confirm Reset</h3>
@@ -140,15 +146,7 @@
     </div>
   </div>
 
-  <!-- full-width footer -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="footer-inner">
-      <div>© Typing Clicker</div>
-      <div class="muted small">Made with ✨</div>
-    </div>
-  </footer>
-
-  <!-- Audio placeholders -->
+  <!-- ========== AUDIO ELEMENTS ========== -->
   <audio id="ambient-audio" loop preload="auto">
     <source src="placeholder-ambient.mp3" type="audio/mpeg">
   </audio>

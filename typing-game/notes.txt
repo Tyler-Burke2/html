@@ -1,5 +1,1 @@
-weird color bar where the footer is
-I want everything to be visible when in full screen, meaning no scrolling needed except for in the div with the upgrades
-Have only 3 upgrades: +1 dollars per right word, Increase golden cookie chance by 1%, Increase combo per right word from adding 0.1 each time to adding 0.2...
-Make the confirmation screen for resetting progress not transparent.
 animation with the red border should fade in and out instead of just appear and disappear in an instant.
