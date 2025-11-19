@@ -1,19 +1,14 @@
-/* script.js - updated to match requested features:
-   - Header/footer (HTML/CSS)
-   - Reset moved to menu with custom confirm modal
-   - Huge center explosion on miss / wrong entry (style B: explode then fade)
-   - Floating +$ animation slowed 3x
-   - Golden words fixed at 5% chance and give 3x reward
-   - Background and layout fixes to avoid fullscreen bar
-*/
+/* script.js - updated with 3 upgrades and stats in menu */
 
 const DEFAULT_WORDS = ["temple","wilds","ancient","compass","whisper","starlight","meadow","journey","sapphire","summit","lantern","quest","guardian","voyage","echo","timber","harbor","mystic","horizon","sanctum"];
 const SAVE_KEY = 'typing-clicker-bright-v1';
 const AUTOSAVE_INTERVAL_MS = 10000;
 const WORD_DURATION_MS = 6000;
 
-/* fixed 5% golden chance as requested */
-const GOLDEN_CHANCE = 0.05;
+// Base values
+const BASE_GOLDEN_CHANCE = 0.05;
+const BASE_COMBO_STEP = 0.1;
+const MULTIPLIER_MAX = 5.0;
 
 // State
 let state = {
@@ -21,9 +16,8 @@ let state = {
   basePerWord: 1,
   upgrades: [
     { id: 'plus1', name: '+1 $/word', desc: 'Add +1 dollar per word', baseCost: 25, add: 1, level: 0, img: 'images/icon_stack_2.png' },
-    { id: 'plus3', name: '+3 $/word', desc: 'Add +3 dollars per word', baseCost: 110, add: 3, level: 0, img: 'images/icon_stack_2.png' },
-    { id: 'combo', name: 'Combo Mastery', desc: 'Increase combo multiplier slightly', baseCost: 260, add: 0, level: 0, img: 'images/icon_stack_2.png' },
-    { id: 'combo-step', name: 'Combo Accelerator', desc: 'Each level adds +0.1 to combo growth per word', baseCost: 200, add: 0.1, level: 0, img: 'images/icon_stack_2.png' }
+    { id: 'golden', name: 'Golden Chance +1%', desc: 'Increase chance of golden words by 1%', baseCost: 100, add: 0.01, level: 0, img: 'images/icon_stack_2.png' },
+    { id: 'combo-step', name: 'Combo Growth +0.1', desc: 'Increase combo growth per word by +0.1', baseCost: 200, add: 0.1, level: 0, img: 'images/icon_stack_2.png' }
   ],
   words: [],
   activeWordEl: null,
@@ -42,9 +36,10 @@ const floatingContainer = document.getElementById('floating-container');
 
 const dollarsEl = document.getElementById('dollars');
 const perWordEl = document.getElementById('per-word');
+const goldenChanceEl = document.getElementById('golden-chance');
+const comboGrowthEl = document.getElementById('combo-growth');
 const comboEl = document.getElementById('combo');
 const multiplierEl = document.getElementById('multiplier');
-const comboMultDisplay = document.getElementById('combo-mult');
 const upgradesEl = document.getElementById('upgrades');
 
 const menuModal = document.getElementById('menu-modal');
@@ -56,6 +51,10 @@ const exportBtn = document.getElementById('export-save');
 const importBtn = document.getElementById('import-save');
 const importArea = document.getElementById('import-area');
 const menuResetBtn = document.getElementById('menu-reset');
+
+const statsModal = document.getElementById('stats-modal');
+const openStatsBtn = document.getElementById('open-stats');
+const closeStatsBtn = document.getElementById('close-stats');
 
 const confirmModal = document.getElementById('confirm-modal');
 const confirmYes = document.getElementById('confirm-reset-yes');
@@ -86,25 +85,28 @@ async function loadWords(){
 // Calculations
 function calcPerWord(){
   let per = state.basePerWord;
-  state.upgrades.forEach(u => { 
-    if(u.add && (u.id === 'plus1' || u.id === 'plus3')) per += u.add * u.level; 
-  });
+  const up = state.upgrades.find(u => u.id === 'plus1');
+  if(up && up.level) per += up.add * up.level;
   return per;
 }
 
-const BASE_MULTIPLIER_STEP = 0.1;
-const MULTIPLIER_MAX = 5.0;
+function getGoldenChance(){
+  const up = state.upgrades.find(u => u.id === 'golden');
+  let chance = BASE_GOLDEN_CHANCE;
+  if(up && up.level) chance += up.add * up.level;
+  return Math.min(chance, 1.0); // cap at 100%
+}
 
-function getEffectiveComboStep(){
-  let step = BASE_MULTIPLIER_STEP;
-  const up = state.upgrades.find(x => x.id === 'combo-step');
-  if(up && up.level) step += up.level * (up.add || 0);
+function getComboStep(){
+  let step = BASE_COMBO_STEP;
+  const up = state.upgrades.find(u => u.id === 'combo-step');
+  if(up && up.level) step += up.add * up.level;
   return step;
 }
 
 function getMultiplierForCombo(combo){
   if(combo <= 1) return 1.0;
-  const step = getEffectiveComboStep();
+  const step = getComboStep();
   const mult = 1 + (combo - 1) * step;
   return Math.min(mult, MULTIPLIER_MAX);
 }
@@ -112,6 +114,8 @@ function getMultiplierForCombo(combo){
 function updateHUD(){
   dollarsEl.textContent = fmt(state.dollars);
   perWordEl.textContent = fmt(calcPerWord());
+  goldenChanceEl.textContent = Math.round(getGoldenChance() * 100) + '%';
+  comboGrowthEl.textContent = getComboStep().toFixed(2);
   comboEl.textContent = state.combo;
   const mult = getMultiplierForCombo(state.combo);
   multiplierEl.textContent = mult.toFixed(2) + '×';
@@ -126,13 +130,11 @@ function updateHUD(){
 
 /* ---------- SPAWN / ANIMATION LOGIC ---------- */
 async function spawnWord(){
-  // Only one active word at a time, and don't spawn while processing submission
   if(state.activeWordEl || state.isProcessing) return;
-
   if(!state.words || state.words.length === 0) state.words = DEFAULT_WORDS.slice();
 
   const word = state.words[Math.floor(Math.random()*state.words.length)];
-  const isGolden = (Math.random() < GOLDEN_CHANCE);
+  const isGolden = (Math.random() < getGoldenChance());
 
   const el = document.createElement('div');
   el.className = 'moving-word';
@@ -154,7 +156,6 @@ async function spawnWord(){
     wordBubble.classList.add('golden');
   }
 
-  // start at right edge and move left (same behavior as before)
   el.style.left = areaWidth + 'px';
   el.style.top = '50%';
   el.style.transform = 'translateY(-50%)';
@@ -176,9 +177,7 @@ async function spawnWord(){
 
   anim.onfinish = () => {
     if(document.body.contains(el) && el.dataset.handled === '0'){
-      // word escaped -> miss
-      // keep the red border logic intact (external code or CSS triggers it elsewhere)
-      flashPlayAreaBorder(); // we keep red border
+      flashPlayAreaBorder();
       playHugeCenterExplosion(el.dataset.word || '');
       handleMiss(el, word);
     }
@@ -219,7 +218,6 @@ function submitActive(){
     return;
   }
 
-  // Mark as being processed to prevent spawn overlap
   state.isProcessing = true;
   el.dataset.handled = '1';
   state.activeWordEl = null;
@@ -244,14 +242,13 @@ function submitActive(){
     const per = calcPerWord();
     let gained = Math.round(per * mult);
 
-    // Golden bonus (3x the already-multiplied amount)
     if(el.dataset.golden === '1'){
       gained = gained * 3;
     }
 
     state.dollars += Math.max(1, gained);
     updateHUD();
-    spawnFloating(`+${gained} $`, el); // this floating will be slowed by 3x inside spawnFloating
+    spawnFloating(`+${gained} $`, el);
 
     try{ successSfx && successSfx.play().catch(()=>{}); }catch{}
 
@@ -264,10 +261,8 @@ function submitActive(){
       setTimeout(()=> { if(bubble) bubble.style.transform = ''; }, 400);
     }
 
-    // Create a subtle success exit (we'll simply fade and remove slower so user sees +$)
     if(anim){
       try{
-        // make the remaining movement quick so the explosion doesn't collide visually
         anim.playbackRate = 1.8;
       } catch(e){
         try{ anim.cancel(); }catch{}
@@ -296,12 +291,10 @@ function submitActive(){
     state.combo = 0;
     state.lastCorrect = 0;
     updateHUD();
-    feedback('Wrong — combo reset', 'crimson');
+    feedback('Wrong – combo reset', 'crimson');
 
     try{ if(anim) anim.cancel(); } catch(e){}
-    // Keep red border behavior as-is
     flashPlayAreaBorder();
-    // play the huge center explosion for missed/wrong event (style B: explode then fade)
     playHugeCenterExplosion(target || el.dataset.word || '');
     handleMiss(el, el.dataset.word, true);
   }
@@ -314,14 +307,11 @@ function handleMiss(el, word, force=false){
   const bubble = el.querySelector('.word-bubble');
   const text = word || (el.dataset && el.dataset.word) || '';
 
-  // Hide bubble so explosion is visible
   if(bubble) bubble.style.visibility = 'hidden';
 
-  // small pieces fallback (kept but the major explosion is handled by playHugeCenterExplosion)
   const bubbleRect = bubble ? bubble.getBoundingClientRect() : el.getBoundingClientRect();
   const containerRect = playArea.getBoundingClientRect();
 
-  // quick small scatter to avoid abruptness
   for(let i=0;i<Math.min(6, text.length);i++){
     const p = document.createElement('div');
     p.className = 'piece';
@@ -349,7 +339,6 @@ function handleMiss(el, word, force=false){
     typedLine.animate([{ opacity:1 }, { opacity:0 }], { duration:500, fill:'forwards' });
   }
 
-  // ensure HUD updated and allow new spawns
   state.combo = 0;
   state.lastCorrect = 0;
   updateHUD();
@@ -376,41 +365,36 @@ function cleanupActive(el, wasSuccess){
   }, 320);
 }
 
-/* ---------- Huge center explosion (style B: explode then fade) ---------- */
+/* ---------- Huge center explosion ---------- */
 function playHugeCenterExplosion(text){
   if(!playArea) return;
   const containerRect = playArea.getBoundingClientRect();
   const cx = containerRect.width / 2;
   const cy = containerRect.height / 2;
 
-  // Create many large center pieces using the letters of the word
   const letters = String(text || '').split('');
-  const count = Math.max(10, (letters.length * 2)); // create a lot for "HUGE"
+  const count = Math.max(10, (letters.length * 2));
   for(let i=0;i<count;i++){
     const ch = letters.length ? letters[i % letters.length] : String.fromCharCode(65 + (i % 26));
     const p = document.createElement('div');
     p.className = 'center-piece-large';
     p.textContent = ch;
-    // large font (scale with viewport a bit for dramatic effect)
     p.style.fontSize = Math.min(220, Math.max(140, Math.round(containerRect.width * 0.12))) + 'px';
-    // goldenish color if any letter was golden? (we can't detect per-letter here, but brighten occasionally)
     if(Math.random() < 0.08) p.classList.add('golden');
 
     playArea.appendChild(p);
 
-    // center positioning relative to playArea
     p.style.left = cx + 'px';
     p.style.top = cy + 'px';
     p.style.transform = 'translate(-50%,-50%) scale(1)';
     p.style.opacity = '1';
 
-    // spread outward, rotate and fade
     const angle = (Math.random()*Math.PI*2);
-    const dist = 140 + Math.random()*320; // large distances for "huge" effect
+    const dist = 140 + Math.random()*320;
     const dx = Math.cos(angle) * dist;
     const dy = Math.sin(angle) * dist - (Math.random()*40);
     const rotate = (Math.random()*360-180);
-    const dur = 900 + Math.random()*900; // 0.9s - 1.8s
+    const dur = 900 + Math.random()*900;
 
     const keyframes = [
       { transform: 'translate(-50%,-50%) scale(1) rotate(0deg)', opacity:1 },
@@ -437,10 +421,8 @@ function spawnFloating(text, nearEl=null){
     transform: 'translate(-50%, 0)'
   });
 
-  // position relative to viewport, but we want it to appear near the element when available
   if(nearEl && nearEl.getBoundingClientRect){
     const rect = nearEl.getBoundingClientRect();
-    // convert to absolute coordinates within the viewport
     el.style.left = (rect.left + rect.width/2) + 'px';
     el.style.top  = (rect.top + rect.height/2 - 18) + 'px';
   } else {
@@ -450,9 +432,8 @@ function spawnFloating(text, nearEl=null){
 
   floatingContainer.appendChild(el);
 
-  // original durations were ~900-1200ms; slow by 3x as requested
   const baseDuration = 900 + Math.random()*300;
-  const dur = baseDuration * 3; // 3x slower
+  const dur = baseDuration * 3;
 
   const anim = el.animate([
     { transform: 'translate(-50%, 0) scale(1)', opacity: 1 },
@@ -463,8 +444,7 @@ function spawnFloating(text, nearEl=null){
 
 /* ---------- Input handling ---------- */
 window.addEventListener('keydown', (e) => {
-  // if menu or confirm modal is open, ignore typing
-  if(!menuModal.classList.contains('hidden') || !confirmModal.classList.contains('hidden')) return;
+  if(!menuModal.classList.contains('hidden') || !statsModal.classList.contains('hidden') || !confirmModal.classList.contains('hidden')) return;
 
   if(e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey){
     state.typed += e.key;
@@ -477,7 +457,6 @@ window.addEventListener('keydown', (e) => {
   } else if(e.key === 'Enter'){
     submitActive();
   } else if(e.key === 'Escape'){
-    // clear typed
     state.typed = '';
     renderTypedForActive();
   }
@@ -596,7 +575,7 @@ function doResetAll(){
   feedback('Progress reset');
 }
 
-/* ---------- Reset handlers (menu) ---------- */
+/* ---------- Reset handlers ---------- */
 function openConfirmReset(){
   confirmModal.classList.remove('hidden');
   confirmModal.setAttribute('aria-hidden','false');
@@ -658,6 +637,18 @@ manualLoadBtn.addEventListener('click', ()=>{ const ok = loadFromLocal(); feedba
 exportBtn.addEventListener('click', exportSave);
 importBtn.addEventListener('click', importSaveFromArea);
 
+/* ---------- Stats handlers ---------- */
+function openStats(){ 
+  statsModal.classList.remove('hidden'); 
+  statsModal.setAttribute('aria-hidden','false'); 
+}
+function closeStats(){ 
+  statsModal.classList.add('hidden'); 
+  statsModal.setAttribute('aria-hidden','true'); 
+}
+openStatsBtn.addEventListener('click', openStats);
+closeStatsBtn.addEventListener('click', closeStats);
+
 /* ---------- Audio toggle ---------- */
 audioToggleBtn.addEventListener('click', ()=>{
   state.ambientOn = !state.ambientOn;
@@ -668,9 +659,8 @@ audioToggleBtn.addEventListener('click', ()=>{
 
 /* ---------- Visual effects ---------- */
 function flashPlayAreaBorder(){
-  // keep red border behavior intact (flash quickly)
   playArea.classList.add('flash-border');
-  setTimeout(()=> playArea.classList.remove('flash-border'), 700);
+  setTimeout(()=> playArea.classList.remove('flash-border'), 800);
 }
 
 function spawnGoldenParticlesAtElement(el, count=12){
