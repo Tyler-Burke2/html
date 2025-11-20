@@ -1,1 +1,3 @@
 animation with the red border should fade in and out instead of just appear and disappear in an instant.
+SEO
+A new div for one time upgrades called 'skills'
