@@ -85,6 +85,26 @@ body {
 }
 
 /* ========================================
+   VERSION BADGE
+======================================== */
+.version-badge {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, rgba(15,23,42,0.85), rgba(7,24,68,0.85));
+  border: 1px solid rgba(255,209,102,0.25);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ========================================
    AMBIENT BACKGROUND EFFECTS
 ======================================== */
 .bg-ambient {
@@ -280,27 +300,34 @@ h1 {
   border-radius: 14px;
   margin-top: 6px;
   box-shadow: inset 0 -20px 60px rgba(2,6,23,0.25);
-  transition: box-shadow 0.6s ease-in-out;
 }
 
-/* Red Border Flash Effect - Smooth fade in and out */
+/* Red Border Flash Effect - FIXED: Proper fade in and out */
 @keyframes borderFlash {
   0% {
+    border-color: var(--bg-a);
     box-shadow: inset 0 -20px 60px rgba(2,6,23,0.25);
   }
-  30% {
-    box-shadow: 0 0 28px 10px rgba(255,0,0,0.85), inset 0 -20px 60px rgba(2,6,23,0.25);
+  15% {
+    border-color: rgba(255,0,0,0.9);
+    box-shadow: 0 0 32px 12px rgba(255,0,0,0.7), inset 0 -20px 60px rgba(2,6,23,0.25);
   }
-  70% {
-    box-shadow: 0 0 28px 10px rgba(255,0,0,0.85), inset 0 -20px 60px rgba(2,6,23,0.25);
+  50% {
+    border-color: rgba(255,0,0,0.9);
+    box-shadow: 0 0 32px 12px rgba(255,0,0,0.7), inset 0 -20px 60px rgba(2,6,23,0.25);
+  }
+  85% {
+    border-color: rgba(255,0,0,0.9);
+    box-shadow: 0 0 32px 12px rgba(255,0,0,0.7), inset 0 -20px 60px rgba(2,6,23,0.25);
   }
   100% {
+    border-color: var(--bg-a);
     box-shadow: inset 0 -20px 60px rgba(2,6,23,0.25);
   }
 }
 
 .play-area.flash-border {
-  animation: borderFlash 1s ease-in-out;
+  animation: borderFlash 1.2s ease-in-out;
 }
 
 /* ========================================
@@ -653,5 +680,12 @@ h1 {
   
   .play-area { 
     height: 350px; 
+  }
+  
+  .version-badge {
+    bottom: 12px;
+    right: 12px;
+    font-size: 11px;
+    padding: 5px 10px;
   }
 }

@@ -1,3 +1,11 @@
+Version 1.0
+
 animation with the red border should fade in and out instead of just appear and disappear in an instant.
 SEO
+when you buy the combo upgrade when you already have the combo maxed. For example, if the highest my combo can go is 5x and I'm already at the max of 5x when buying the next upgrade, buying the upgrade automatically puts me at 6x instead of leaving me at 5x and letting me work up to it.
+
+-------------
+
+Version 1.1
+
 A new div for one time upgrades called 'skills'

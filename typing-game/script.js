@@ -1,5 +1,5 @@
 /* ========================================
-   TYPING CLICKER - SPACE ADVENTURE
+   TYPING CLICKER - SPACE ADVENTURE v1.0
    Main game logic and state management
 ======================================== */
 
@@ -372,7 +372,7 @@ function handleSuccess(el, anim) {
   // Double speed exit for correct words
   if (anim) {
     try {
-      anim.playbackRate = 3.6; // 2x original speed (was 1.8)
+      anim.playbackRate = 3.6;
     } catch(e) {
       try { 
         anim.cancel(); 
@@ -384,7 +384,7 @@ function handleSuccess(el, anim) {
         { left: currentLeft + 'px' },
         { left: endLeft + 'px' }
       ], { 
-        duration: 150, // Half of previous 300ms
+        duration: 150,
         easing: 'cubic-bezier(.2,.8,.2,1)', 
         fill: 'forwards' 
       });
@@ -662,6 +662,10 @@ function buyUpgrade(id) {
   
   state.dollars -= cost;
   u.level++;
+  
+  // FIX: Don't automatically boost combo when buying Fusion Reactor
+  // The new max should just increase the ceiling, not the current combo
+  
   updateHUD();
   autosaveNow();
   feedback(`Bought ${u.name}`);

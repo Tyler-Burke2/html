@@ -4,7 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="google-adsense-account" content="ca-pub-6678514461414293">
-  <title>Typing Clicker – Space Adventure</title>
+  
+  <!-- SEO Meta Tags -->
+  <title>Typing Clicker – Space Adventure | Free Online Typing Game</title>
+  <meta name="description" content="Test your typing speed in this addictive space-themed typing clicker game. Type words before they escape, build massive combos, and unlock powerful upgrades. Play now for free!">
+  <meta name="keywords" content="typing game, typing clicker, typing speed test, space game, typing practice, online game, free typing game, word game, combo game">
+  <meta name="author" content="Typing Clicker">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Typing Clicker – Space Adventure">
+  <meta property="og:description" content="Test your typing speed in this addictive space-themed typing clicker game. Type words before they escape, build combos, and unlock powerful upgrades!">
+  <meta property="og:url" content="https://burkey2.com">
+  <meta property="og:site_name" content="Typing Clicker">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Typing Clicker – Space Adventure">
+  <meta name="twitter:description" content="Test your typing speed in this addictive space-themed typing clicker game. Build combos and unlock upgrades!">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
@@ -23,13 +40,13 @@
   <header class="site-header" role="banner">
     <div class="header-inner">
       <div class="header-brand">
-        <img src="images/icon_stack_2.png" alt="" class="brand-img placeholder-img">
+        <img src="images/icon_stack_2.png" alt="Typing Clicker game icon" class="brand-img placeholder-img">
         <div>
           <strong>Typing Clicker</strong>
         </div>
       </div>
       <nav>
-        <a href="/index.html" class="header-link" id="placeholder-link" aria-label="Placeholder link for external site">Visit Site</a>
+        <a href="/index.html" class="header-link" aria-label="Home page">Home</a>
       </nav>
     </div>
   </header>
@@ -42,13 +59,13 @@
     <div class="container">
       
       <!-- LEFT PANEL: Game Stage -->
-      <main class="left-panel" tabindex="0" aria-label="Typing area">
+      <section class="left-panel" tabindex="0" aria-label="Typing area">
         <div class="stage card">
           
           <!-- Stage Header: Title + HUD -->
           <header class="stage-header">
             <div class="brand">
-              <img src="images/icon_stack_2.png" alt="" class="brand-img placeholder-img">
+              <img src="images/icon_stack_2.png" alt="Typing Clicker brand" class="brand-img placeholder-img">
               <div>
                 <h1>Typing Clicker</h1>
                 <p class="subtitle">Space Adventure – hit words before they escape!</p>
@@ -57,22 +74,22 @@
 
             <div class="hud">
               <div class="hud-item">
-                <img src="images/icon_stack_2.png" alt="" class="coin-icon placeholder-img">
+                <img src="images/icon_stack_2.png" alt="Currency icon" class="coin-icon placeholder-img">
                 <div>
                   <div class="label">Dollars</div>
-                  <div id="dollars" class="big-num">0</div>
+                  <div id="dollars" class="big-num" aria-label="Dollar amount">0</div>
                 </div>
               </div>
 
               <div class="hud-item combo-box">
                 <div class="label">Combo</div>
-                <div id="combo" class="combo-num">0</div>
-                <div id="multiplier" class="multiplier">1.00×</div>
+                <div id="combo" class="combo-num" aria-label="Current combo">0</div>
+                <div id="multiplier" class="multiplier" aria-label="Current multiplier">1.00×</div>
               </div>
 
               <div class="hud-controls">
-                <button id="open-menu" class="btn small">Menu</button>
-                <button id="audio-toggle" class="btn small alt">Music</button>
+                <button id="open-menu" class="btn small" aria-label="Open game menu">Menu</button>
+                <button id="audio-toggle" class="btn small alt" aria-label="Toggle background music">Music</button>
               </div>
             </div>
           </header>
@@ -87,19 +104,22 @@
             <div class="hint">Type anywhere – press <strong>Enter</strong> to submit. Backspace edits. Esc clears.</div>
           </div>
         </div>
-      </main>
+      </section>
 
       <!-- RIGHT PANEL: Shop -->
-      <aside class="right-panel" aria-label="Shop and stats">
+      <aside class="right-panel" aria-label="Shop and upgrades">
         <div class="card shop-card">
           <h2>Shop</h2>
           <p class="muted">Buy upgrades to boost $ per word or combo power. (No auto-typing.)</p>
-          <div id="upgrades" class="upgrades" aria-live="polite"></div>
+          <div id="upgrades" class="upgrades" aria-live="polite" aria-label="Available upgrades"></div>
         </div>
       </aside>
       
     </div>
   </main>
+
+  <!-- ========== VERSION INDICATOR ========== -->
+  <div class="version-badge" aria-label="Game version">v1.0</div>
 
   <!-- ========== FLOATING +$ CONTAINER ========== -->
   <div id="floating-container" aria-hidden="true"></div>
@@ -110,18 +130,18 @@
       <h3 id="menu-title">Game Menu</h3>
       <div class="menu-actions">
         <div class="menu-row">
-          <button id="manual-save" class="btn">Save Now</button>
-          <button id="manual-load" class="btn alt">Load</button>
-          <button id="export-save" class="btn alt">Export</button>
-          <button id="import-save" class="btn alt">Import</button>
+          <button id="manual-save" class="btn" aria-label="Manually save game">Save Now</button>
+          <button id="manual-load" class="btn alt" aria-label="Load saved game">Load</button>
+          <button id="export-save" class="btn alt" aria-label="Export save data">Export</button>
+          <button id="import-save" class="btn alt" aria-label="Import save data">Import</button>
         </div>
 
         <textarea id="import-area" class="import-area" placeholder="Paste save JSON here" aria-label="Import or export save JSON"></textarea>
 
         <div class="menu-row" style="margin-top:12px;">
-          <button id="open-stats" class="btn alt">View Stats</button>
-          <button id="menu-reset" class="btn danger">Reset Progress</button>
-          <button id="close-menu" class="btn">Close</button>
+          <button id="open-stats" class="btn alt" aria-label="View game statistics">View Stats</button>
+          <button id="menu-reset" class="btn danger" aria-label="Reset all progress">Reset Progress</button>
+          <button id="close-menu" class="btn" aria-label="Close menu">Close</button>
         </div>
       </div>
       <div class="muted small">Autosaves every 10s.</div>
@@ -133,13 +153,13 @@
     <div class="modal-panel card" role="document">
       <h3 id="stats-title">Stats</h3>
       <div class="stats-content">
-        <div class="stat"><div class="stat-label">Per Word</div><div id="per-word" class="stat-value">1</div></div>
-        <div class="stat"><div class="stat-label">Golden Chance</div><div id="golden-chance" class="stat-value">5%</div></div>
-        <div class="stat"><div class="stat-label">Combo Growth</div><div id="combo-growth" class="stat-value">0.10</div></div>
-        <div class="stat"><div class="stat-label">Max Multiplier</div><div id="max-mult" class="stat-value">5.00×</div></div>
+        <div class="stat"><div class="stat-label">Per Word</div><div id="per-word" class="stat-value" aria-label="Dollars per word">1</div></div>
+        <div class="stat"><div class="stat-label">Golden Chance</div><div id="golden-chance" class="stat-value" aria-label="Golden word chance">5%</div></div>
+        <div class="stat"><div class="stat-label">Combo Growth</div><div id="combo-growth" class="stat-value" aria-label="Combo growth rate">0.10</div></div>
+        <div class="stat"><div class="stat-label">Max Multiplier</div><div id="max-mult" class="stat-value" aria-label="Maximum multiplier">5.00×</div></div>
       </div>
       <div style="margin-top:16px;">
-        <button id="close-stats" class="btn">Close</button>
+        <button id="close-stats" class="btn" aria-label="Close statistics">Close</button>
       </div>
     </div>
   </div>
@@ -150,20 +170,20 @@
       <h3 id="confirm-title">Confirm Reset</h3>
       <p>Are you sure you want to reset all progress? This cannot be undone.</p>
       <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:12px;">
-        <button id="confirm-reset-no" class="btn alt">Cancel</button>
-        <button id="confirm-reset-yes" class="btn danger">Yes, reset</button>
+        <button id="confirm-reset-no" class="btn alt" aria-label="Cancel reset">Cancel</button>
+        <button id="confirm-reset-yes" class="btn danger" aria-label="Confirm reset">Yes, reset</button>
       </div>
     </div>
   </div>
 
   <!-- ========== AUDIO ELEMENTS ========== -->
-  <audio id="ambient-audio" loop preload="auto">
+  <audio id="ambient-audio" loop preload="auto" aria-label="Background music">
     <source src="placeholder-ambient.mp3" type="audio/mpeg">
   </audio>
-  <audio id="type-sfx" preload="auto">
+  <audio id="type-sfx" preload="auto" aria-label="Typing sound effect">
     <source src="placeholder-typed.mp3" type="audio/mpeg">
   </audio>
-  <audio id="success-sfx" preload="auto">
+  <audio id="success-sfx" preload="auto" aria-label="Success sound effect">
     <source src="placeholder-success.mp3" type="audio/mpeg">
   </audio>
 
