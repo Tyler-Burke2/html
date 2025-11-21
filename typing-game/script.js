@@ -842,8 +842,10 @@ audioToggleBtn.addEventListener('click', () => {
 
 // ========== VISUAL EFFECTS ==========
 function flashPlayAreaBorder() {
+  playArea.classList.remove('flash-border');
+  // Force reflow to restart animation
+  void playArea.offsetWidth;
   playArea.classList.add('flash-border');
-  setTimeout(() => playArea.classList.remove('flash-border'), 1000);
 }
 
 function spawnGoldenParticlesAtElement(el, count = 12) {

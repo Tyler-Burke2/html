@@ -73,6 +73,7 @@ p {
     display: flex;
     justify-content: center;
     gap: 30px;
+    flex-wrap: wrap;
 }
 
 .game-btn {
@@ -92,4 +93,117 @@ p {
     border-color: var(--accent2);
     color: var(--accent2);
     box-shadow: 0 0 14px var(--accent2);
+}
+
+/* ========================================
+   DEV LOG SECTION
+======================================== */
+.devlog-section {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid #2a2a2a;
+    text-align: left;
+}
+
+.devlog-section h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    color: var(--accent2);
+    text-shadow: 0 0 10px var(--accent);
+    margin-bottom: 8px;
+}
+
+.devlog-subtitle {
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.6;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.devlog-entry {
+    background: var(--panel);
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.devlog-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.devlog-game {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent2);
+}
+
+.devlog-version {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.devlog-date {
+    margin-left: auto;
+    font-size: 0.85rem;
+    opacity: 0.5;
+}
+
+.devlog-intro {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    margin: 0 0 20px 0;
+    line-height: 1.5;
+}
+
+.devlog-content h3 {
+    color: var(--accent);
+    margin: 20px 0 10px 0;
+    font-size: 1rem;
+}
+
+.devlog-content ul {
+    margin: 0;
+    padding-left: 24px;
+    line-height: 1.8;
+}
+
+.devlog-content li {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 6px;
+}
+
+.devlog-content strong {
+    color: var(--accent2);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .devlog-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .devlog-date {
+        margin-left: 0;
+    }
+    
+    .btn-box {
+        flex-direction: column;
+        align-items: center;
+    }
 }
