@@ -6,9 +6,9 @@
     <meta name="google-adsense-account" content="ca-pub-6678514461414293">
     
     <!-- SEO Meta Tags -->
-    <title>Burkey2 – Free Online Games | Typing Clicker & Muffin Masher</title>
-    <meta name="description" content="Play free online games at Burkey2! Enjoy Typing Clicker, a space-themed typing speed game, and Muffin Masher. No downloads required – play instantly in your browser.">
-    <meta name="keywords" content="free online games, browser games, typing game, typing clicker, muffin masher, free games, online games, casual games, typing practice, typing speed test">
+    <title>Burkey2 – Free Online Games | Star Typer & Muffin Masher</title>
+    <meta name="description" content="Play free online games at Burkey2! Enjoy Star Typer, a space-themed typing speed game, and Muffin Masher. No downloads required – play instantly in your browser.">
+    <meta name="keywords" content="free online games, browser games, typing game, star typer, muffin masher, free games, online games, casual games, typing practice, typing speed test">
     <meta name="author" content="Burkey2">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://burkey2.com/">
@@ -17,14 +17,14 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://burkey2.com/">
     <meta property="og:title" content="Burkey2 – Free Online Games">
-    <meta property="og:description" content="Play free online games at Burkey2! Enjoy Typing Clicker and Muffin Masher. No downloads – play instantly in your browser.">
+    <meta property="og:description" content="Play free online games at Burkey2! Enjoy Star Typer and Muffin Masher. No downloads – play instantly in your browser.">
     <meta property="og:site_name" content="Burkey2">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://burkey2.com/">
     <meta name="twitter:title" content="Burkey2 – Free Online Games">
-    <meta name="twitter:description" content="Play free online games at Burkey2! Enjoy Typing Clicker and Muffin Masher. No downloads – play instantly in your browser.">
+    <meta name="twitter:description" content="Play free online games at Burkey2! Enjoy Star Typer and Muffin Masher. No downloads – play instantly in your browser.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +41,7 @@
         "@type": "WebSite",
         "name": "Burkey2",
         "url": "https://burkey2.com/",
-        "description": "Play free online games at Burkey2. Home of Typing Clicker and Muffin Masher.",
+        "description": "Play free online games at Burkey2. Home of Star Typer and Muffin Masher.",
         "potentialAction": {
             "@type": "SearchAction",
             "target": "https://burkey2.com/?q={search_term_string}",
@@ -53,7 +53,7 @@
     {
         "@context": "https://schema.org",
         "@type": "VideoGame",
-        "name": "Typing Clicker",
+        "name": "Star Typer",
         "description": "A space-themed typing speed game where you type words before they escape to build combos and earn upgrades.",
         "genre": ["Casual", "Educational", "Typing"],
         "gamePlatform": "Web Browser",
@@ -78,56 +78,80 @@
 </script>
 <body>
 
-<header>
+<header role="banner">
     <strong>BURKEY2 // HOME</strong>
-    <nav>
-        <a href="muffin-masher/index.html">Muffin Masher</a>
-        <a href="typing-game/index.html">Typing Clicker</a>
+    <nav role="navigation" aria-label="Main navigation">
+        <!-- <a href="muffin-masher/index.html" title="Play Muffin Masher - Free Online Game">Muffin Masher</a> -->
+        <a href="typing-game/index.html" title="Play Star Typer - Free Typing Game">Star Typer</a>
     </nav>
 </header>
 
-<div class="container">
-    <h1>WELCOME TO THE SITE</h1>
-    <p>Choose a game below to begin your adventure.</p>
+<main class="container" role="main">
+    <h1>WELCOME TO BURKEY2</h1>
+    <p>Play free online games – no downloads required. Choose a game below to begin your adventure.</p>
 
-    <div class="btn-box">
-        <a class="game-btn" href="muffin-masher/index.html">Play Muffin Masher</a>
-        <a class="game-btn" href="typing-game/index.html">Play Typing Clicker</a>
-    </div>
+    <section class="btn-box" aria-label="Game selection">
+        <!-- <a class="game-btn" href="muffin-masher/index.html" title="Play Muffin Masher">Play Muffin Masher</a> -->
+        <a class="game-btn" href="typing-game/index.html" title="Play Star Typer">Play Star Typer</a>
+    </section>
 
     <!-- Dev Log Section -->
-    <section class="devlog-section">
-        <h2>DEV LOG</h2>
+    <section class="devlog-section" aria-labelledby="devlog-heading">
+        <h2 id="devlog-heading">DEV LOG</h2>
         <p class="devlog-subtitle">Latest updates and patch notes</p>
 
         <article class="devlog-entry">
-            <div class="devlog-header">
-                <span class="devlog-game">Typing Clicker</span>
-                <span class="devlog-version">v1.0</span>
-                <span class="devlog-date">November 2024</span>
+            <header class="devlog-header">
+                <span class="devlog-game">Star Typer</span>
+                <span class="devlog-version">v1.01</span>
+                <time class="devlog-date" datetime="2024-11">November 2024</time>
+            </header>
+            
+            <p class="devlog-intro">Bug fixes and polish updates.</p>
+            
+            <div class="devlog-content">
+                <h3>🔧 Fixes</h3>
+                <ul>
+                    <li>Fixed combo multiplier bug when purchasing upgrades</li>
+                    <li>Improved red border flash animation with smooth fade</li>
+                </ul>
+
+                <h3>🚀 Changes</h3>
+                <ul>
+                    <li>Renamed game from "Typing Clicker" to "Star Typer"</li>
+                    <li>New rocket-themed upgrade names</li>
+                </ul>
             </div>
+        </article>
+
+        <article class="devlog-entry">
+            <header class="devlog-header">
+                <span class="devlog-game">Star Typer</span>
+                <span class="devlog-version">v1.0</span>
+                <time class="devlog-date" datetime="2024-11">November 2024</time>
+            </header>
             
             <p class="devlog-intro">The official Version 1.0 release! All core features are polished and ready for play.</p>
             
             <div class="devlog-content">
-                <h4>🎮 Core Gameplay</h4>
+                <h3>🎮 Core Gameplay</h3>
                 <ul>
                     <li>Words fly across the screen – type them before they escape!</li>
                     <li>Combo system that builds your multiplier with each correct word</li>
                     <li>Miss penalty resets combo with explosive visual effects</li>
                 </ul>
 
-                <h4>💰 Upgrade System</h4>
+                <h3>💰 Upgrade System</h3>
                 <ul>
-                    <li><strong>Credit Booster</strong> – +1 dollar per word</li>
-                    <li><strong>Stellar Scanner</strong> – +1% golden word chance per level</li>
-                    <li><strong>Warp Drive</strong> – +0.1 combo growth per word</li>
-                    <li><strong>Fusion Reactor</strong> – +1.0 max multiplier cap</li>
+                    <li><strong>Fuel Cell</strong> – +1 dollar per word</li>
+                    <li><strong>UFO Radar</strong> – +1% UFO word chance per level</li>
+                    <li><strong>Rocket Thrusters</strong> – +0.1 combo growth per word</li>
+                    <li><strong>Main Engine</strong> – +1.0 max multiplier cap</li>
                 </ul>
 
-                <h4>✨ Features</h4>
+                <h3>✨ Features</h3>
                 <ul>
-                    <li>Golden words with 3x payout</li>
+                    <li>UFO words with 3x payout</li>
                     <li>Auto-save every 10 seconds</li>
                     <li>Export/Import save data</li>
                     <li>Space-themed visuals with smooth animations</li>
@@ -135,9 +159,9 @@
             </div>
         </article>
     </section>
-</div>
+</main>
 
-<footer>
+<footer role="contentinfo">
     <small>© 2025 Burkey2 – All Rights Reserved</small>
 </footer>
 

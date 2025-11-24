@@ -1,5 +1,5 @@
 /* ========================================
-   TYPING CLICKER - SPACE ADVENTURE v1.0
+   STAR TYPER - SPACE ADVENTURE v1.01
    Main game logic and state management
 ======================================== */
 
@@ -11,7 +11,7 @@ const DEFAULT_WORDS = [
   "timber", "harbor", "mystic", "horizon", "sanctum"
 ];
 
-const SAVE_KEY = 'typing-clicker-bright-v1';
+const SAVE_KEY = 'star-typer-v1';
 const AUTOSAVE_INTERVAL_MS = 10000;
 const WORD_DURATION_MS = 6000;
 
@@ -26,7 +26,7 @@ let state = {
   upgrades: [
     { 
       id: 'credits', 
-      name: 'Credit Booster', 
+      name: 'Fuel Cell', 
       desc: 'Gain +1 credit per successful word', 
       baseCost: 25, 
       add: 1, 
@@ -35,8 +35,8 @@ let state = {
     },
     { 
       id: 'stellar', 
-      name: 'Stellar Scanner', 
-      desc: 'Increase chance of stellar words by 1%', 
+      name: 'UFO Radar', 
+      desc: 'Increase chance of UFO words by 1%', 
       baseCost: 100, 
       add: 0.01, 
       level: 0, 
@@ -44,7 +44,7 @@ let state = {
     },
     { 
       id: 'warp', 
-      name: 'Warp Drive', 
+      name: 'Rocket Thrusters', 
       desc: 'Accelerate combo growth by +0.1 per word', 
       baseCost: 200, 
       add: 0.1, 
@@ -53,7 +53,7 @@ let state = {
     },
     { 
       id: 'reactor', 
-      name: 'Fusion Reactor', 
+      name: 'Main Engine', 
       desc: 'Expand max multiplier capacity by +1.0', 
       baseCost: 500, 
       add: 1.0, 
@@ -660,11 +660,26 @@ function buyUpgrade(id) {
     return; 
   }
   
+  // Store current multiplier before purchase
+  const currentMult = getMultiplierForCombo(state.combo);
+  
   state.dollars -= cost;
   u.level++;
   
-  // FIX: Don't automatically boost combo when buying Fusion Reactor
-  // The new max should just increase the ceiling, not the current combo
+  // FIX: Adjust combo to maintain current multiplier for combo-affecting upgrades
+  if (u.id === 'warp' || u.id === 'reactor') {
+    // Calculate what combo is needed to achieve the same multiplier with new settings
+    const newStep = getComboStep();
+    const newMax = getMaxMultiplier();
+    
+    // If current multiplier was at or below 1.0, keep combo as is
+    if (currentMult > 1.0) {
+      // mult = 1 + (combo - 1) * step
+      // So: combo = ((mult - 1) / step) + 1
+      const neededCombo = Math.floor(((currentMult - 1) / newStep) + 1);
+      state.combo = Math.max(0, neededCombo);
+    }
+  }
   
   updateHUD();
   autosaveNow();
@@ -846,6 +861,8 @@ function flashPlayAreaBorder() {
   // Force reflow to restart animation
   void playArea.offsetWidth;
   playArea.classList.add('flash-border');
+  // Remove class after animation completes (2 seconds)
+  setTimeout(() => playArea.classList.remove('flash-border'), 2000);
 }
 
 function spawnGoldenParticlesAtElement(el, count = 12) {
