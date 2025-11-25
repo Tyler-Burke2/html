@@ -6,6 +6,10 @@ when you buy the combo upgrade when you already have the combo maxed. For exampl
 
 Version 1.02
 
+Sprites are added
+Expanded word list
+
+
 -------------
 
 Version 1.1
@@ -17,3 +21,17 @@ make UFOs have a different word bank with harder words
 create 5 different word banks so that when a user first joins the game, the words are super easy, and then you can buy skills that give harder words which would switch to a more difficult word bank, but those harder words would be worth more money. This means there should be 4 skills available for purchase, each continuously increasing in price until the final one is purchased
 change the money system so that each letter gives a dollar instead of each word giving the same amount
 Change the theme of the game slightly: rocketship on the right and you have to destroy the asteroids and ufos before they hit the rocket.
+
+---------------
+
+Version 1.2
+
+---------------
+
+Version 1.3
+
+---------------
+
+Version 1.4
+
+---------------

@@ -1,5 +1,5 @@
 /* ========================================
-   STAR TYPER - SPACE ADVENTURE v1.01
+   STAR TYPER - SPACE ADVENTURE v1.02
    Main game logic and state management
 ======================================== */
 
@@ -31,7 +31,7 @@ let state = {
       baseCost: 25, 
       add: 1, 
       level: 0, 
-      img: 'images/icon_stack_2.png' 
+      img: 'images/fuel_cells.png' 
     },
     { 
       id: 'stellar', 
@@ -40,7 +40,7 @@ let state = {
       baseCost: 100, 
       add: 0.01, 
       level: 0, 
-      img: 'images/icon_stack_2.png' 
+      img: 'images/UFO.png' 
     },
     { 
       id: 'warp', 
@@ -49,7 +49,7 @@ let state = {
       baseCost: 200, 
       add: 0.1, 
       level: 0, 
-      img: 'images/icon_stack_2.png' 
+      img: 'images/thrusters.png' 
     },
     { 
       id: 'reactor', 
@@ -58,7 +58,7 @@ let state = {
       baseCost: 500, 
       add: 1.0, 
       level: 0, 
-      img: 'images/icon_stack_2.png' 
+      img: 'images/engine.png' 
     }
   ],
   words: [],
