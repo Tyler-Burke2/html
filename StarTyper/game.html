@@ -24,8 +24,17 @@
   <meta name="twitter:description" content="Test your typing speed in this addictive space-themed typing game. Build combos and unlock upgrades!">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/cards.css">
+<link rel="stylesheet" href="css/play-area.css">
+<link rel="stylesheet" href="css/skills-shop.css">
+<link rel="stylesheet" href="css/buttons.css">
+<link rel="stylesheet" href="css/modals.css">
+<link rel="stylesheet" href="css/effects.css">
+<link rel="stylesheet" href="css/responsive.css">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8RWNSSWLCK"></script>
 <script>
@@ -40,7 +49,7 @@
   <header class="site-header" role="banner">
     <div class="header-inner">
       <div class="header-brand">
-        <img src="images/rocket.png" alt="Star Typer game icon" class="brand-img placeholder-img">
+        <img src="images/rocket.png" alt="Star Typer game icon" class="brand-img">
         <div>
           <strong>Star Typer</strong>
         </div>
@@ -65,7 +74,7 @@
           <!-- Stage Header: Title + HUD -->
           <header class="stage-header">
             <div class="brand">
-              <img src="images/rocket.png" alt="Star Typer brand" class="brand-img placeholder-img">
+              <img src="images/rocket.png" alt="Star Typer brand" class="brand-img">
               <div>
                 <h1>Star Typer</h1>
                 <p class="subtitle">Space Adventure – hit words before they escape!</p>
@@ -74,7 +83,7 @@
 
             <div class="hud">
               <div class="hud-item">
-                <img src="images/money.png" alt="Currency icon" class="coin-icon placeholder-img">
+                <img src="images/money.png" alt="Currency icon" class="coin-icon">
                 <div>
                   <div class="label">Dollars</div>
                   <div id="dollars" class="big-num" aria-label="Dollar amount">0</div>
@@ -106,11 +115,19 @@
         </div>
       </section>
 
-      <!-- RIGHT PANEL: Shop -->
-      <aside class="right-panel" aria-label="Shop and upgrades">
+      <!-- RIGHT PANEL: Skills & Shop -->
+      <aside class="right-panel" aria-label="Skills and upgrades">
+        <!-- Skills Card -->
+        <div class="card skills-card">
+          <h2>Skills</h2>
+          <p class="muted">One-time unlocks that permanently enhance your gameplay.</p>
+          <div id="skills" class="skills" aria-live="polite" aria-label="Available skills"></div>
+        </div>
+
+        <!-- Shop Card -->
         <div class="card shop-card">
           <h2>Shop</h2>
-          <p class="muted">Buy upgrades to boost $ per word or combo power. (No auto-typing.)</p>
+          <p class="muted">Buy upgrades to boost $ per letter or combo power.</p>
           <div id="upgrades" class="upgrades" aria-live="polite" aria-label="Available upgrades"></div>
         </div>
       </aside>
@@ -119,7 +136,7 @@
   </main>
 
   <!-- ========== VERSION INDICATOR ========== -->
-  <div class="version-badge" aria-label="Game version"><v1 class="02"></v1></div>
+  <div class="version-badge" aria-label="Game version">v1.10</div>
 
   <!-- ========== FLOATING +$ CONTAINER ========== -->
   <div id="floating-container" aria-hidden="true"></div>
@@ -129,6 +146,14 @@
     <div class="modal-panel card" role="document">
       <h3 id="menu-title">Game Menu</h3>
       <div class="menu-actions">
+        <!-- Word Bank Selector -->
+        <div class="word-bank-selector">
+          <label for="word-bank-select" class="label">Active Word Bank:</label>
+          <select id="word-bank-select" class="word-bank-select">
+            <option value="easy">Easy</option>
+          </select>
+        </div>
+
         <div class="menu-row">
           <button id="manual-save" class="btn" aria-label="Manually save game">Save Now</button>
           <button id="manual-load" class="btn alt" aria-label="Load saved game">Load</button>
@@ -153,8 +178,10 @@
     <div class="modal-panel card" role="document">
       <h3 id="stats-title">Stats</h3>
       <div class="stats-content">
-        <div class="stat"><div class="stat-label">Per Word</div><div id="per-word" class="stat-value" aria-label="Dollars per word">1</div></div>
+        <div class="stat"><div class="stat-label">Base Per Letter</div><div id="per-letter" class="stat-value" aria-label="Base dollars per letter">$1</div></div>
+        <div class="stat"><div class="stat-label">Word Bank Multiplier</div><div id="bank-mult" class="stat-value" aria-label="Word bank multiplier">1×</div></div>
         <div class="stat"><div class="stat-label">Golden Chance</div><div id="golden-chance" class="stat-value" aria-label="Golden word chance">5%</div></div>
+        <div class="stat"><div class="stat-label">Sentence Chance</div><div id="sentence-chance" class="stat-value" aria-label="Sentence chance">0%</div></div>
         <div class="stat"><div class="stat-label">Combo Growth</div><div id="combo-growth" class="stat-value" aria-label="Combo growth rate">0.10</div></div>
         <div class="stat"><div class="stat-label">Max Multiplier</div><div id="max-mult" class="stat-value" aria-label="Maximum multiplier">5.00×</div></div>
       </div>
@@ -187,6 +214,17 @@
     <source src="placeholder-success.mp3" type="audio/mpeg">
   </audio>
 
-  <script src="script.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/dom.js"></script>
+  <script src="js/calculations.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/skills.js"></script>
+  <script src="js/upgrades.js"></script>
+  <script src="js/save.js"></script>
+  <script src="js/words.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/modals.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

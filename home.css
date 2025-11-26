@@ -190,6 +190,61 @@ p {
     color: var(--accent2);
 }
 
+/* Add this to the end of your home.css file */
+
+/* ========================================
+   DEV LOG TABS
+======================================== */
+.devlog-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+    border-bottom: 2px solid #2a2a2a;
+    justify-content: center;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: #666;
+    padding: 12px 32px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.tab-btn:hover {
+    color: var(--accent);
+}
+
+.tab-btn.active {
+    color: var(--accent2);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent2);
+    box-shadow: 0 0 8px var(--accent2);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     .devlog-header {
@@ -207,3 +262,4 @@ p {
         align-items: center;
     }
 }
+

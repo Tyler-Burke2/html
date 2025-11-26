@@ -1,0 +1,65 @@
+/* ========================================
+   HEADER
+======================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background: linear-gradient(180deg, rgba(15,23,42,0.98), rgba(7,24,68,0.96));
+  border-bottom: 2px solid rgba(255,209,102,0.15);
+  box-shadow: 0 4px 16px rgba(255,209,102,0.08);
+  display: flex;
+  align-items: center;
+  z-index: 100;
+}
+
+.header-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+}
+
+.header-brand { 
+  display: flex; 
+  gap: 12px; 
+  align-items: center; 
+}
+
+.header-link {
+  color: var(--accent-blu);
+  text-decoration: none;
+  font-weight: 700;
+  border: 1px solid rgba(61,224,255,0.2);
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.header-link:hover {
+  background: rgba(61,224,255,0.1);
+  border-color: var(--accent-blu);
+}
+
+/* Version Badge */
+.version-badge {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, rgba(15,23,42,0.85), rgba(7,24,68,0.85));
+  border: 1px solid rgba(255,209,102,0.25);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}

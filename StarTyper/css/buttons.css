@@ -1,0 +1,39 @@
+/* ========================================
+   BUTTONS
+======================================== */
+.btn {
+  background: linear-gradient(90deg, var(--accent1), #ffb84d);
+  border: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(255,160,70,0.12);
+  color: #061826;
+  transition: transform 0.1s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn.alt {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.03);
+  color: var(--text);
+}
+
+.btn.small { 
+  padding: 8px 10px; 
+  font-size: 14px; 
+  border-radius: 8px; 
+}
+
+.btn.danger { 
+  background: linear-gradient(90deg, #ff6b6b, #ff7f7f); 
+  color: #fff; 
+}

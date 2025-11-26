@@ -14,17 +14,21 @@ Expanded word list
 
 Version 1.1
 
-add sprites - regular words are asteroids, golden words are UFOs, website logo is a rocket,
+add sprites - website logo is a rocket,
 A new div for one time upgrades called 'skills'
 make the first skill cost $1000 and be a skill that adds sentences that if spelled all correctly give loads of money. 
 make UFOs have a different word bank with harder words
 create 5 different word banks so that when a user first joins the game, the words are super easy, and then you can buy skills that give harder words which would switch to a more difficult word bank, but those harder words would be worth more money. This means there should be 4 skills available for purchase, each continuously increasing in price until the final one is purchased
 change the money system so that each letter gives a dollar instead of each word giving the same amount
-Change the theme of the game slightly: rocketship on the right and you have to destroy the asteroids and ufos before they hit the rocket.
+
+index.html should have 2 options for dev logs. On default, it should just put the main updates (1.1, 1.2, 1.3...) on the screen but there should be a tab to show the sub updates (1.01, 1.02, 1.03...)
 
 ---------------
 
 Version 1.2
+
+Regular words are asteroids, golden words are UFOs,
+Change the theme of the game slightly: rocketship on the right and you have to destroy the asteroids and ufos before they hit the rocket.
 
 ---------------
 

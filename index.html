@@ -82,7 +82,7 @@
     <strong>BURKEY2 // HOME</strong>
     <nav role="navigation" aria-label="Main navigation">
         <!-- <a href="muffin-masher/index.html" title="Play Muffin Masher - Free Online Game">Muffin Masher</a> -->
-        <a href="typing-game/index.html" title="Play Star Typer - Free Typing Game">Star Typer</a>
+        <a href="StarTyper/game.html" title="Play Star Typer - Free Typing Game">Star Typer</a>
     </nav>
 </header>
 
@@ -92,7 +92,7 @@
 
     <section class="btn-box" aria-label="Game selection">
         <!-- <a class="game-btn" href="muffin-masher/index.html" title="Play Muffin Masher">Play Muffin Masher</a> -->
-        <a class="game-btn" href="typing-game/index.html" title="Play Star Typer">Play Star Typer</a>
+        <a class="game-btn" href="StarTyper/game.html" title="Play Star Typer">Play Star Typer</a>
     </section>
 
     <!-- Dev Log Section -->
@@ -100,82 +100,235 @@
         <h2 id="devlog-heading">DEV LOG</h2>
         <p class="devlog-subtitle">Latest updates and patch notes</p>
 
-        <article class="devlog-entry">
-            <header class="devlog-header">
-                <span class="devlog-game">Star Typer</span>
-                <span class="devlog-version">v1.02</span>
-                <time class="devlog-date" datetime="2024-11">November 2024</time>
-            </header>
-            
-            <p class="devlog-intro">New Sprites</p>
-            
-            <div class="devlog-content">
-                <h3>🚀 Changes</h3>
-                <ul>
-                    <li>Added sprite for upgrades and logo</li>
-                    <li>Doubled the size of the word list to have more difficult words</li>
-                </ul>
-            </div>
-        </article>
-        
-        <article class="devlog-entry">
-            <header class="devlog-header">
-                <span class="devlog-game">Star Typer</span>
-                <span class="devlog-version">v1.01</span>
-                <time class="devlog-date" datetime="2024-11">November 2024</time>
-            </header>
-            
-            <p class="devlog-intro">Bug fixes and polish updates.</p>
-            
-            <div class="devlog-content">
-                <h3>🔧 Fixes</h3>
-                <ul>
-                    <li>Fixed combo multiplier bug when purchasing upgrades</li>
-                    <li>Improved red border flash animation with smooth fade</li>
-                </ul>
+        <!-- Tab Navigation -->
+        <div class="devlog-tabs">
+            <button class="tab-btn active" data-tab="updates">Updates</button>
+            <button class="tab-btn" data-tab="patches">Patches</button>
+        </div>
 
-                <h3>🚀 Changes</h3>
-                <ul>
-                    <li>Renamed game from "Typing Clicker" to "Star Typer"</li>
-                    <li>New rocket-themed upgrade names</li>
-                </ul>
-            </div>
-        </article>
+        <!-- Updates Tab Content (Major versions only) -->
+        <div id="updates-content" class="tab-content active">
+            <article class="devlog-entry" data-version="1.1">
+                <header class="devlog-header">
+                    <span class="devlog-game">Star Typer</span>
+                    <span class="devlog-version">v1.10</span>
+                    <time class="devlog-date" datetime="2024-11">November 2024</time>
+                </header>
+                
+                <p class="devlog-intro">Major gameplay overhaul with progression systems, difficulty tiers, and modular code structure!</p>
+                
+                <div class="devlog-content">
+                    <h3>🎮 New Systems</h3>
+                    <ul>
+                        <li><strong>Skills System</strong> - New one-time unlock purchases that permanently enhance gameplay. Displayed in dedicated Skills section above the Shop.</li>
+                        <li><strong>Phrase Training Skill</strong> - Costs $1,000. Unlocks sentence challenges that appear rarely (2% base chance) and reward 5× normal payout. Sentences display in green with a gentle screen shake warning before they appear.</li>
+                        <li><strong>Phrase Amplifier Upgrade</strong> - Unlocked after purchasing Phrase Training. Increases sentence spawn rate by +1% per level.</li>
+                        <li><strong>Word Bank Progression</strong> - Five difficulty tiers available through skill purchases: Easy (1×) → Medium (2×) → Hard (4×) → Very Hard (8×) → Expert (16×). Each tier must be unlocked in order.</li>
+                        <li><strong>Word Bank Selector</strong> - Toggle between unlocked difficulty tiers in the game menu. Each tier has its own custom word list loaded from JSON files.</li>
+                    </ul>
 
-        <article class="devlog-entry">
-            <header class="devlog-header">
-                <span class="devlog-game">Star Typer</span>
-                <span class="devlog-version">v1.0</span>
-                <time class="devlog-date" datetime="2024-11">November 2024</time>
-            </header>
-            
-            <p class="devlog-intro">The official Version 1.0 release! All core features are polished and ready for play.</p>
-            
-            <div class="devlog-content">
-                <h3>🎮 Core Gameplay</h3>
-                <ul>
-                    <li>Words fly across the screen – type them before they escape!</li>
-                    <li>Combo system that builds your multiplier with each correct word</li>
-                    <li>Miss penalty resets combo with explosive visual effects</li>
-                </ul>
+                    <h3>💰 Economy Overhaul</h3>
+                    <ul>
+                        <li><strong>Per-Letter System</strong> - Changed from per-word earnings to per-letter. Money = (Base + Fuel Cell Upgrades) × Word Bank Multiplier × Combo Multiplier × Letter Count.</li>
+                        <li><strong>Multiplicative Word Banks</strong> - Higher difficulty tiers multiply your earnings: Easy (1×), Medium (2×), Hard (4×), Very Hard (8×), Expert (16×).</li>
+                        <li><strong>UFO Words Enhanced</strong> - UFO/Golden words now pull from one tier above your current difficulty. If on Expert, they pull from special Ultra-Hard word bank (words-ufo.json).</li>
+                        <li><strong>Rebalanced Costs</strong> - Complete rebalancing of all upgrade and skill costs to match new economy.</li>
+                    </ul>
 
-                <h3>💰 Upgrade System</h3>
-                <ul>
-                    <li><strong>Fuel Cell</strong> – +1 dollar per word</li>
-                    <li><strong>UFO Radar</strong> – +1% UFO word chance per level</li>
-                    <li><strong>Rocket Thrusters</strong> – +0.1 combo growth per word</li>
-                    <li><strong>Main Engine</strong> – +1.0 max multiplier cap</li>
-                </ul>
+                    <h3>🏗️ Technical Improvements</h3>
+                    <ul>
+                        <li><strong>Modular JavaScript</strong> - Split script.js into 12 focused files: config, state, dom, calculations, ui, skills, upgrades, save, words, effects, modals, and main.</li>
+                        <li><strong>Modular CSS</strong> - Split styles.css into 11 organized files: variables, base, header, layout, cards, play-area, skills-shop, buttons, modals, effects, and responsive.</li>
+                        <li><strong>JSON Word Banks</strong> - All word lists now loaded from dedicated JSON files in json/ folder: words-easy, words-medium, words-hard, words-veryhard, words-expert, words-ufo, words-sentences.</li>
+                    </ul>
 
-                <h3>✨ Features</h3>
-                <ul>
-                    <li>UFO words with 3x payout</li>
-                    <li>Auto-save every 10 seconds</li>
-                    <li>Export/Import save data</li>
-                    <li>Space-themed visuals with smooth animations</li>
-                </ul>
-            </div>
-        </article>
+                    <h3>🎨 Visual & UX</h3>
+                    <ul>
+                        <li><strong>Skills Visual Theme</strong> - Skills display with green accent colors to differentiate from yellow shop upgrades.</li>
+                        <li><strong>Sentence Effects</strong> - Green particle effects and green explosion pieces for completed sentences.</li>
+                        <li><strong>Stats Modal Updated</strong> - Added "Base Per Letter" and "Word Bank Multiplier" stats. Updated "Sentence Chance" stat.</li>
+                        <li><strong>Skills Hide When Purchased</strong> - Completed skill purchases automatically disappear from the Skills list.</li>
+                    </ul>
+
+                    <h3>🔧 Balance Changes</h3>
+                    <ul>
+                        <li>Fuel Cell: $25 → $100 base cost, now adds $1 per letter instead of per word</li>
+                        <li>UFO Radar: $100 → $500 base cost</li>
+                        <li>Rocket Thrusters: $200 → $1,000 base cost</li>
+                        <li>Main Engine: $500 → $2,500 base cost</li>
+                        <li>Combo multiplier maintenance when purchasing Warp/Reactor upgrades</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="devlog-entry" data-version="1.0">
+                <header class="devlog-header">
+                    <span class="devlog-game">Star Typer</span>
+                    <span class="devlog-version">v1.0</span>
+                    <time class="devlog-date" datetime="2024-11">November 2024</time>
+                </header>
+                
+                <p class="devlog-intro">The official Version 1.0 release! All core features are polished and ready for play.</p>
+                
+                <div class="devlog-content">
+                    <h3>🎮 Core Gameplay</h3>
+                    <ul>
+                        <li>Words fly across the screen – type them before they escape!</li>
+                        <li>Combo system that builds your multiplier with each correct word</li>
+                        <li>Miss penalty resets combo with explosive visual effects</li>
+                    </ul>
+
+                    <h3>💰 Upgrade System</h3>
+                    <ul>
+                        <li><strong>Fuel Cell</strong> – +1 dollar per word</li>
+                        <li><strong>UFO Radar</strong> – +1% UFO word chance per level</li>
+                        <li><strong>Rocket Thrusters</strong> – +0.1 combo growth per word</li>
+                        <li><strong>Main Engine</strong> – +1.0 max multiplier cap</li>
+                    </ul>
+
+                    <h3>✨ Features</h3>
+                    <ul>
+                        <li>UFO words with 3x payout</li>
+                        <li>Auto-save every 10 seconds</li>
+                        <li>Export/Import save data</li>
+                        <li>Space-themed visuals with smooth animations</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <!-- Patches Tab Content (All versions including sub-versions) -->
+        <div id="patches-content" class="tab-content">
+            <article class="devlog-entry" data-version="1.1">
+                <header class="devlog-header">
+                    <span class="devlog-game">Star Typer</span>
+                    <span class="devlog-version">v1.10</span>
+                    <time class="devlog-date" datetime="2024-11">November 2024</time>
+                </header>
+                
+                <p class="devlog-intro">Major gameplay overhaul with progression systems, difficulty tiers, and modular code structure!</p>
+                
+                <div class="devlog-content">
+                    <h3>🎮 New Systems</h3>
+                    <ul>
+                        <li><strong>Skills System</strong> - New one-time unlock purchases that permanently enhance gameplay. Displayed in dedicated Skills section above the Shop.</li>
+                        <li><strong>Phrase Training Skill</strong> - Costs $1,000. Unlocks sentence challenges that appear rarely (2% base chance) and reward 5× normal payout. Sentences display in green with a gentle screen shake warning before they appear.</li>
+                        <li><strong>Phrase Amplifier Upgrade</strong> - Unlocked after purchasing Phrase Training. Increases sentence spawn rate by +1% per level.</li>
+                        <li><strong>Word Bank Progression</strong> - Five difficulty tiers available through skill purchases: Easy (1×) → Medium (2×) → Hard (4×) → Very Hard (8×) → Expert (16×). Each tier must be unlocked in order.</li>
+                        <li><strong>Word Bank Selector</strong> - Toggle between unlocked difficulty tiers in the game menu. Each tier has its own custom word list loaded from JSON files.</li>
+                    </ul>
+
+                    <h3>💰 Economy Overhaul</h3>
+                    <ul>
+                        <li><strong>Per-Letter System</strong> - Changed from per-word earnings to per-letter. Money = (Base + Fuel Cell Upgrades) × Word Bank Multiplier × Combo Multiplier × Letter Count.</li>
+                        <li><strong>Multiplicative Word Banks</strong> - Higher difficulty tiers multiply your earnings: Easy (1×), Medium (2×), Hard (4×), Very Hard (8×), Expert (16×).</li>
+                        <li><strong>UFO Words Enhanced</strong> - UFO/Golden words now pull from one tier above your current difficulty. If on Expert, they pull from special Ultra-Hard word bank (words-ufo.json).</li>
+                        <li><strong>Rebalanced Costs</strong> - Complete rebalancing of all upgrade and skill costs to match new economy.</li>
+                    </ul>
+
+                    <h3>🏗️ Technical Improvements</h3>
+                    <ul>
+                        <li><strong>Modular JavaScript</strong> - Split script.js into 12 focused files: config, state, dom, calculations, ui, skills, upgrades, save, words, effects, modals, and main.</li>
+                        <li><strong>Modular CSS</strong> - Split styles.css into 11 organized files: variables, base, header, layout, cards, play-area, skills-shop, buttons, modals, effects, and responsive.</li>
+                        <li><strong>JSON Word Banks</strong> - All word lists now loaded from dedicated JSON files in json/ folder: words-easy, words-medium, words-hard, words-veryhard, words-expert, words-ufo, words-sentences.</li>
+                    </ul>
+
+                    <h3>🎨 Visual & UX</h3>
+                    <ul>
+                        <li><strong>Skills Visual Theme</strong> - Skills display with green accent colors to differentiate from yellow shop upgrades.</li>
+                        <li><strong>Sentence Effects</strong> - Green particle effects and green explosion pieces for completed sentences.</li>
+                        <li><strong>Stats Modal Updated</strong> - Added "Base Per Letter" and "Word Bank Multiplier" stats. Updated "Sentence Chance" stat.</li>
+                        <li><strong>Skills Hide When Purchased</strong> - Completed skill purchases automatically disappear from the Skills list.</li>
+                    </ul>
+
+                    <h3>🔧 Balance Changes</h3>
+                    <ul>
+                        <li>Fuel Cell: $25 → $100 base cost, now adds $1 per letter instead of per word</li>
+                        <li>UFO Radar: $100 → $500 base cost</li>
+                        <li>Rocket Thrusters: $200 → $1,000 base cost</li>
+                        <li>Main Engine: $500 → $2,500 base cost</li>
+                        <li>Combo multiplier maintenance when purchasing Warp/Reactor upgrades</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="devlog-entry" data-version="1.02">
+                <header class="devlog-header">
+                    <span class="devlog-game">Star Typer</span>
+                    <span class="devlog-version">v1.02</span>
+                    <time class="devlog-date" datetime="2024-11">November 2024</time>
+                </header>
+                
+                <p class="devlog-intro">New Sprites</p>
+                
+                <div class="devlog-content">
+                    <h3>🚀 Changes</h3>
+                    <ul>
+                        <li>Added sprite for upgrades and logo</li>
+                        <li>Doubled the size of the word list to have more difficult words</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="devlog-entry" data-version="1.01">
+                <header class="devlog-header">
+                    <span class="devlog-game">Star Typer</span>
+                    <span class="devlog-version">v1.01</span>
+                    <time class="devlog-date" datetime="2024-11">November 2024</time>
+                </header>
+                
+                <p class="devlog-intro">Bug fixes and polish updates.</p>
+                
+                <div class="devlog-content">
+                    <h3>🔧 Fixes</h3>
+                    <ul>
+                        <li>Fixed combo multiplier bug when purchasing upgrades</li>
+                        <li>Improved red border flash animation with smooth fade</li>
+                    </ul>
+
+                    <h3>🚀 Changes</h3>
+                    <ul>
+                        <li>Renamed game from "Typing Clicker" to "Star Typer"</li>
+                        <li>New rocket-themed upgrade names</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="devlog-entry" data-version="1.0">
+                <header class="devlog-header">
+                    <span class="devlog-game">Star Typer</span>
+                    <span class="devlog-version">v1.0</span>
+                    <time class="devlog-date" datetime="2024-11">November 2024</time>
+                </header>
+                
+                <p class="devlog-intro">The official Version 1.0 release! All core features are polished and ready for play.</p>
+                
+                <div class="devlog-content">
+                    <h3>🎮 Core Gameplay</h3>
+                    <ul>
+                        <li>Words fly across the screen – type them before they escape!</li>
+                        <li>Combo system that builds your multiplier with each correct word</li>
+                        <li>Miss penalty resets combo with explosive visual effects</li>
+                    </ul>
+
+                    <h3>💰 Upgrade System</h3>
+                    <ul>
+                        <li><strong>Fuel Cell</strong> – +1 dollar per word</li>
+                        <li><strong>UFO Radar</strong> – +1% UFO word chance per level</li>
+                        <li><strong>Rocket Thrusters</strong> – +0.1 combo growth per word</li>
+                        <li><strong>Main Engine</strong> – +1.0 max multiplier cap</li>
+                    </ul>
+
+                    <h3>✨ Features</h3>
+                    <ul>
+                        <li>UFO words with 3x payout</li>
+                        <li>Auto-save every 10 seconds</li>
+                        <li>Export/Import save data</li>
+                        <li>Space-themed visuals with smooth animations</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
     </section>
 </main>
 
@@ -184,7 +337,29 @@
 </footer>
 
 <!-- JS -->
-<script src="home.js"></script>
+<script>
+// Tab switching functionality
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Remove active class from all buttons and contents
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Add active class to clicked button
+        btn.classList.add('active');
+        
+        // Show corresponding content
+        const tabName = btn.getAttribute('data-tab');
+        const contentToShow = document.getElementById(`${tabName}-content`);
+        if (contentToShow) {
+            contentToShow.classList.add('active');
+        }
+    });
+});
+</script>
 
 </body>
 </html>

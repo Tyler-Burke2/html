@@ -1,0 +1,142 @@
+/* ========================================
+   SKILLS & SHOP
+======================================== */
+
+/* Skills Card */
+.skills-card {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.skills-card h2 {
+  margin: 0 0 8px 0;
+}
+
+.skills-card .muted {
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.skills {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(74,222,128,0.1);
+  background: linear-gradient(180deg, rgba(74,222,128,0.03), rgba(74,222,128,0.01));
+  flex-shrink: 0;
+}
+
+.skill-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #0a2818, #071c10);
+  flex-shrink: 0;
+}
+
+.skill-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.skill-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--accent-green);
+}
+
+.skill-desc {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.skill-buy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Shop Card */
+.shop-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.shop-card h2 {
+  margin: 0 0 8px 0;
+}
+
+.shop-card .muted {
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.upgrades {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.upgrade {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+  flex-shrink: 0;
+}
+
+.u-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #082035, #07182b);
+  flex-shrink: 0;
+}
+
+.u-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.u-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.u-desc {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.u-buy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}

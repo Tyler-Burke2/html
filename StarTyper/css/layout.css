@@ -1,0 +1,57 @@
+/* ========================================
+   LAYOUT
+======================================== */
+.bg-ambient {
+  position: fixed; 
+  inset: 0; 
+  z-index: 0; 
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(61,224,255,0.06) 1px, transparent 1px),
+    radial-gradient(circle at 80% 75%, rgba(255,107,203,0.04) 1px, transparent 1px);
+  opacity: 0.9; 
+  animation: drift 36s linear infinite; 
+  filter: blur(8px);
+}
+
+@keyframes drift {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-60px); }
+  100% { transform: translateY(0); }
+}
+
+.site-main {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: calc(var(--header-height) + 20px) 20px 20px 20px;
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 18px;
+  z-index: 2;
+}
+
+.left-panel { 
+  outline: none; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+.right-panel { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px;
+  max-height: calc(100vh - var(--header-height) - 40px);
+  overflow-y: auto;
+}
