@@ -82,7 +82,7 @@
     <strong>BURKEY2 // HOME</strong>
     <nav role="navigation" aria-label="Main navigation">
         <!-- <a href="muffin-masher/index.html" title="Play Muffin Masher - Free Online Game">Muffin Masher</a> -->
-        <a href="StarTyper/game.html" title="Play Star Typer - Free Typing Game">Star Typer</a>
+        <a href="Star Typer/game.html" title="Play Star Typer - Free Typing Game">Star Typer</a>
     </nav>
 </header>
 
@@ -92,7 +92,7 @@
 
     <section class="btn-box" aria-label="Game selection">
         <!-- <a class="game-btn" href="muffin-masher/index.html" title="Play Muffin Masher">Play Muffin Masher</a> -->
-        <a class="game-btn" href="StarTyper/game.html" title="Play Star Typer">Play Star Typer</a>
+        <a class="game-btn" href="Star Typer/game.html" title="Play Star Typer">Play Star Typer</a>
     </section>
 
     <!-- Dev Log Section -->
@@ -199,6 +199,43 @@
 
         <!-- Patches Tab Content (All versions including sub-versions) -->
         <div id="patches-content" class="tab-content">
+            <article class="devlog-entry" data-version="1.11">
+                <header class="devlog-header">
+                    <span class="devlog-game">Star Typer</span>
+                    <span class="devlog-version">v1.11</span>
+                    <time class="devlog-date" datetime="2024-11">November 2024</time>
+                </header>
+                
+                <p class="devlog-intro">Bug fixes and quality of life improvements.</p>
+                
+                <div class="devlog-content">
+                    <h3>✨ New Features</h3>
+                    <ul>
+                        <li><strong>Loading Screen</strong> - Added space-themed loading screen with animated logo, stars, and bouncing dots while game resources load</li>
+                    </ul>
+
+                    <h3>🔧 Fixes</h3>
+                    <ul>
+                        <li><strong>Auto-Switch Word Banks</strong> - Purchasing difficulty skills now automatically switches to the new word bank instead of requiring manual selection</li>
+                        <li><strong>Save/Load Sentence Upgrade</strong> - Fixed bug where Phrase Amplifier upgrade wouldn't restore properly after loading a save</li>
+                        <li><strong>Import Sentence Upgrade</strong> - Fixed bug where importing a save wouldn't restore Phrase Amplifier if Phrase Training was purchased</li>
+                    </ul>
+
+                    <h3>⚡ Performance</h3>
+                    <ul>
+                        <li>Optimized particle explosion calculations by caching position values</li>
+                        <li>Reduced redundant DOM queries in miss handler</li>
+                    </ul>
+
+                    <h3>🎨 Quality of Life</h3>
+                    <ul>
+                        <li>Added version constant to config.js for easier version tracking</li>
+                        <li>Improved feedback messages when unlocking new difficulty tiers</li>
+                        <li>Better error handling in word loading system</li>
+                    </ul>
+                </div>
+            </article>
+
             <article class="devlog-entry" data-version="1.1">
                 <header class="devlog-header">
                     <span class="devlog-game">Star Typer</span>

@@ -25,6 +25,10 @@ index.html should have 2 options for dev logs. On default, it should just put th
 
 ---------------
 
+Version 1.11
+
+Bought the upgrade that should take me to the medium word bank. It doesn't.
+
 Version 1.2
 
 Regular words are asteroids, golden words are UFOs,

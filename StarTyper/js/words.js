@@ -284,6 +284,9 @@ function handleMiss(el, word, force = false) {
 
   const bubbleRect = bubble ? bubble.getBoundingClientRect() : el.getBoundingClientRect();
   const containerRect = playArea.getBoundingClientRect();
+  
+  const centerX = bubbleRect.left - containerRect.left + (bubbleRect.width / 2);
+  const centerY = bubbleRect.top - containerRect.top + (bubbleRect.height / 2);
 
   for (let i = 0; i < Math.min(6, text.length); i++) {
     const p = document.createElement('div');
@@ -291,10 +294,8 @@ function handleMiss(el, word, force = false) {
     p.textContent = text[i];
     playArea.appendChild(p);
 
-    const startLeft = bubbleRect.left - containerRect.left + (bubbleRect.width / 2);
-    const startTop = bubbleRect.top - containerRect.top + (bubbleRect.height / 2);
-    p.style.left = startLeft + 'px';
-    p.style.top = startTop + 'px';
+    p.style.left = centerX + 'px';
+    p.style.top = centerY + 'px';
 
     const angle = Math.random() * Math.PI * 2;
     const dist = 40 + Math.random() * 80;

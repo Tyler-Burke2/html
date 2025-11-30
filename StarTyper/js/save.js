@@ -45,6 +45,22 @@ function loadFromLocal() {
         const found = d.skills.find(x => x.id === s.id);
         s.purchased = found ? (found.purchased || false) : false;
       });
+      
+      // Re-add sentence upgrade if phrases was purchased
+      const phrasesSkill = state.skills.find(s => s.id === 'phrases');
+      if (phrasesSkill && phrasesSkill.purchased) {
+        if (!state.upgrades.find(u => u.id === 'sentences')) {
+          state.upgrades.push({
+            id: 'sentences',
+            name: 'Phrase Amplifier',
+            desc: 'Increase sentence spawn chance by +1%',
+            baseCost: 2000,
+            add: 0.01,
+            level: 0,
+            img: 'images/money.png'
+          });
+        }
+      }
     }
     
     if (Array.isArray(d.upgrades)) {
@@ -96,6 +112,22 @@ function importSaveFromArea() {
         const f = d.skills.find(x => x.id === s.id);
         s.purchased = f ? (f.purchased || false) : false;
       });
+      
+      // Re-add sentence upgrade if phrases was purchased
+      const phrasesSkill = state.skills.find(s => s.id === 'phrases');
+      if (phrasesSkill && phrasesSkill.purchased) {
+        if (!state.upgrades.find(u => u.id === 'sentences')) {
+          state.upgrades.push({
+            id: 'sentences',
+            name: 'Phrase Amplifier',
+            desc: 'Increase sentence spawn chance by +1%',
+            baseCost: 2000,
+            add: 0.01,
+            level: 0,
+            img: 'images/money.png'
+          });
+        }
+      }
     }
     
     if (Array.isArray(d.upgrades)) { 

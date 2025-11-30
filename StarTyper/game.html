@@ -24,17 +24,19 @@
   <meta name="twitter:description" content="Test your typing speed in this addictive space-themed typing game. Build combos and unlock upgrades!">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/cards.css">
-<link rel="stylesheet" href="css/play-area.css">
-<link rel="stylesheet" href="css/skills-shop.css">
-<link rel="stylesheet" href="css/buttons.css">
-<link rel="stylesheet" href="css/modals.css">
-<link rel="stylesheet" href="css/effects.css">
-<link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/loading.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/play-area.css">
+  <link rel="stylesheet" href="css/skills-shop.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/modals.css">
+  <link rel="stylesheet" href="css/effects.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8RWNSSWLCK"></script>
 <script>
@@ -45,6 +47,21 @@
   gtag('config', 'G-8RWNSSWLCK');
 </script>
 <body>
+  <!-- ========== LOADING SCREEN ========== -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-content">
+      <img src="images/rocket.png" alt="Star Typer" class="loading-logo">
+      <h2 class="loading-title">STAR TYPER</h2>
+      <div class="loading-spinner">
+        <div class="spinner-dot"></div>
+        <div class="spinner-dot"></div>
+        <div class="spinner-dot"></div>
+      </div>
+      <p class="loading-text">Loading space adventure...</p>
+    </div>
+    <div class="loading-stars"></div>
+  </div>
+
   <!-- ========== HEADER ========== -->
   <header class="site-header" role="banner">
     <div class="header-inner">
@@ -136,7 +153,7 @@
   </main>
 
   <!-- ========== VERSION INDICATOR ========== -->
-  <div class="version-badge" aria-label="Game version">v1.10</div>
+  <div class="version-badge" aria-label="Game version">v1.11</div>
 
   <!-- ========== FLOATING +$ CONTAINER ========== -->
   <div id="floating-container" aria-hidden="true"></div>
@@ -214,6 +231,7 @@
     <source src="placeholder-success.mp3" type="audio/mpeg">
   </audio>
 
+  <script src="js/loading.js"></script>
   <script src="js/config.js"></script>
   <script src="js/state.js"></script>
   <script src="js/dom.js"></script>
@@ -226,5 +244,7 @@
   <script src="js/effects.js"></script>
   <script src="js/modals.js"></script>
   <script src="js/main.js"></script>
+</body>
+</html>
 </body>
 </html>

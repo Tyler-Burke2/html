@@ -91,7 +91,8 @@ function buySkill(id) {
     const bankName = bankMap[id];
     if (bankName && !state.unlockedWordBanks.includes(bankName)) {
       state.unlockedWordBanks.push(bankName);
-      feedback(`${s.name} unlocked! Switch word banks in the menu.`);
+      state.currentWordBank = bankName; // Auto-switch to new difficulty
+      feedback(`${s.name} unlocked! Now using ${bankName} words.`);
     }
   }
   
