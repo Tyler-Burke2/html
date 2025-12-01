@@ -3,7 +3,7 @@
    Constants and configuration values
 ======================================== */
 
-const GAME_VERSION = '1.11';
+const GAME_VERSION = '1.12';
 
 const DEFAULT_WORDS = [
   "temple", "wilds", "ancient", "compass", "whisper", 

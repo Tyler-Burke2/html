@@ -23,16 +23,20 @@ async function loadWords() {
 }
 
 async function spawnWord() {
-  if (state.activeWordEl || state.isProcessing) return;
+  // FIX #1: Only check isProcessing, allow multiple words on screen
+  if (state.isProcessing) return;
   
   const sentenceChance = getSentenceChance();
   const goldenChance = getGoldenChance();
   
   let word, isSentence = false, isGolden = false, wordBank = state.currentWordBank;
   
+  // FIX #4: Sentences should use words-sentences.json
   if (sentenceChance > 0 && Math.random() < sentenceChance) {
     isSentence = true;
-    const sentenceList = state.words.sentences.length ? state.words.sentences : DEFAULT_WORDS;
+    const sentenceList = state.words.sentences && state.words.sentences.length 
+      ? state.words.sentences 
+      : ["The quick brown fox jumps over the lazy dog"];
     word = sentenceList[Math.floor(Math.random() * sentenceList.length)];
     
     playArea.classList.remove('sentence-warning');
@@ -102,6 +106,7 @@ async function spawnWord() {
     fill: 'forwards'
   });
 
+  // FIX #1: Set this as the active word for typing
   state.activeWordEl = el;
   state.activeAnimation = anim;
 
@@ -157,8 +162,9 @@ function submitActive() {
 
   state.isProcessing = true;
   el.dataset.handled = '1';
+  
+  // FIX #1: Clear active word references immediately
   state.activeWordEl = null;
-  const anim = state.activeAnimation;
   state.activeAnimation = null;
 
   const target = el.dataset.word || '';
@@ -172,13 +178,13 @@ function submitActive() {
   }
 
   if (candidate === target) {
-    handleSuccess(el, anim);
+    handleSuccess(el);
   } else {
-    handleWrong(el, anim, target);
+    handleWrong(el, target);
   }
 }
 
-function handleSuccess(el, anim) {
+function handleSuccess(el) {
   state.combo = state.combo + 1;
   state.lastCorrect = now();
   
@@ -224,49 +230,61 @@ function handleSuccess(el, anim) {
     }
   }
 
-  if (anim) {
-    try {
-      anim.playbackRate = 3.6;
-    } catch(e) {
-      try { 
-        anim.cancel(); 
-      } catch(e2) {}
-      
-      const endLeft = -(el.offsetWidth || 120) - 8;
-      const currentLeft = parseFloat(getComputedStyle(el).left) || 0;
-      const fast = el.animate([
-        { left: currentLeft + 'px' },
-        { left: endLeft + 'px' }
-      ], { 
-        duration: 150,
-        easing: 'cubic-bezier(.2,.8,.2,1)', 
-        fill: 'forwards' 
-      });
-      fast.onfinish = () => cleanupActive(el, true);
-    }
-    anim.onfinish = () => cleanupActive(el, true);
-  } else {
-    cleanupActive(el, true);
-  }
-
+  // FIX #5: Check if at max BEFORE spawning floating text to avoid overlap
   const maxMult = getMaxMultiplier();
   const multAfter = getMultiplierForCombo(state.combo);
-  if (multAfter >= maxMult) {
+  const wasAtMax = mult >= maxMult;
+  const nowAtMax = multAfter >= maxMult;
+  
+  // Only show MAX message if we just hit max (not if already at max)
+  if (nowAtMax && !wasAtMax) {
     const comboNumEl = document.querySelector('.combo-num');
     if (comboNumEl) comboNumEl.classList.add('maxed');
-    spawnFloating(`MAX ${maxMult.toFixed(1)}×!`, el);
+    // Delay the MAX message slightly so it doesn't overlap with +$ message
+    setTimeout(() => {
+      spawnFloating(`MAX ${maxMult.toFixed(1)}×!`, el);
+    }, 300);
+  } else if (nowAtMax) {
+    const comboNumEl = document.querySelector('.combo-num');
+    if (comboNumEl) comboNumEl.classList.add('maxed');
   }
+
+  // FIX #1: Spawn next word IMMEDIATELY
+  state.isProcessing = false;
+  spawnWord();
+
+  // Fade out the typed line on the old word
+  const typedLine = el.querySelector('.typed-line');
+  if (typedLine) {
+    typedLine.animate([{ opacity: 1 }, { opacity: 0 }], { 
+      duration: 320, 
+      fill: 'forwards' 
+    });
+  }
+
+  // Speed up the old word to rush it off screen
+  const endLeft = -(el.offsetWidth || 120) - 8;
+  const currentLeft = parseFloat(getComputedStyle(el).left) || 0;
+  
+  const fastAnim = el.animate([
+    { left: currentLeft + 'px' },
+    { left: endLeft + 'px' }
+  ], { 
+    duration: 2000,
+    easing: 'cubic-bezier(.2,.8,.2,1)', 
+    fill: 'forwards' 
+  });
+  
+  fastAnim.onfinish = () => {
+    if (document.body.contains(el)) el.remove();
+  };
 }
 
-function handleWrong(el, anim, target) {
+function handleWrong(el, target) {
   state.combo = 0;
   state.lastCorrect = 0;
   updateHUD();
-  feedback('Wrong – combo reset', 'crimson');
-
-  try { 
-    if (anim) anim.cancel(); 
-  } catch(e) {}
+  feedback('Wrong — combo reset', 'crimson');
   
   flashPlayAreaBorder();
   playHugeCenterExplosion(target || el.dataset.word || '', el.dataset.sentence === '1');
@@ -330,26 +348,6 @@ function handleMiss(el, word, force = false) {
     state.isProcessing = false;
     setTimeout(() => spawnWord(), 380);
   }, 780);
-}
-
-function cleanupActive(el, wasSuccess) {
-  if (!el) return;
-  
-  const typedLine = el.querySelector('.typed-line');
-  if (typedLine) {
-    typedLine.animate([{ opacity: 1 }, { opacity: 0 }], { 
-      duration: 320, 
-      fill: 'forwards' 
-    });
-  }
-  
-  setTimeout(() => {
-    if (document.body.contains(el)) el.remove();
-    if (state.activeWordEl === el) state.activeWordEl = null;
-    state.activeAnimation = null;
-    state.isProcessing = false;
-    setTimeout(() => spawnWord(), 320);
-  }, 320);
 }
 
 window.addEventListener('keydown', (e) => {

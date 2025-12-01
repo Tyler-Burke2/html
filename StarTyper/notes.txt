@@ -29,8 +29,20 @@ Version 1.11
 
 Bought the upgrade that should take me to the medium word bank. It doesn't.
 
+Version 1.12
+
+Make words appear as the other one is leaving.
+Fix combo math because when you buy combo upgrades, it changes what the combo is at.
+Sentences don't appear when the upgrade is bought. It isn't accessing the sentences word bank; instead showing regular words
+
+keep the speed of the animation the same
+
+---------------
+
 Version 1.2
 
+Mobile support
+Pause button (esc)
 Regular words are asteroids, golden words are UFOs,
 Change the theme of the game slightly: rocketship on the right and you have to destroy the asteroids and ufos before they hit the rocket.
 

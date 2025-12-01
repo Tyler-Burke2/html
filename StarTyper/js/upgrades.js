@@ -41,18 +41,23 @@ function buyUpgrade(id) {
     return; 
   }
   
+  // FIX #2: Preserve the current multiplier value when buying Warp/Reactor
   const currentMult = getMultiplierForCombo(state.combo);
   
   state.dollars -= cost;
   u.level++;
   
+  // FIX #2: After buying Warp Drive or Main Engine, recalculate combo to maintain multiplier
   if (u.id === 'warp' || u.id === 'reactor') {
     const newStep = getComboStep();
     const newMax = getMaxMultiplier();
     
+    // If we have a multiplier > 1.0, calculate what combo is needed to maintain it
     if (currentMult > 1.0) {
-      const neededCombo = Math.floor(((currentMult - 1) / newStep) + 1);
-      state.combo = Math.max(0, neededCombo);
+      // Formula: mult = 1 + (combo - 1) * step
+      // Solve for combo: combo = ((mult - 1) / step) + 1
+      const neededCombo = Math.round(((currentMult - 1) / newStep) + 1);
+      state.combo = Math.max(1, Math.min(neededCombo, 1000)); // Cap at reasonable value
     }
   }
   

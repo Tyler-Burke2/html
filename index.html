@@ -66,6 +66,8 @@
         }
     }
     </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6678514461414293"
+     crossorigin="anonymous"></script>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8RWNSSWLCK"></script>
@@ -135,7 +137,7 @@
                         <li><strong>Rebalanced Costs</strong> - Complete rebalancing of all upgrade and skill costs to match new economy.</li>
                     </ul>
 
-                    <h3>🏗️ Technical Improvements</h3>
+                    <h3>🗂️ Technical Improvements</h3>
                     <ul>
                         <li><strong>Modular JavaScript</strong> - Split script.js into 12 focused files: config, state, dom, calculations, ui, skills, upgrades, save, words, effects, modals, and main.</li>
                         <li><strong>Modular CSS</strong> - Split styles.css into 11 organized files: variables, base, header, layout, cards, play-area, skills-shop, buttons, modals, effects, and responsive.</li>
@@ -199,6 +201,37 @@
 
         <!-- Patches Tab Content (All versions including sub-versions) -->
         <div id="patches-content" class="tab-content">
+            <article class="devlog-entry" data-version="1.12">
+                <header class="devlog-header">
+                    <span class="devlog-game">Star Typer</span>
+                    <span class="devlog-version">v1.12</span>
+                    <time class="devlog-date" datetime="2024-12">December 2024</time>
+                </header>
+                
+                <p class="devlog-intro">Gameplay improvements and critical bug fixes for smoother typing experience.</p>
+                
+                <div class="devlog-content">
+                    <h3>🚀 Gameplay Improvements</h3>
+                    <ul>
+                        <li><strong>Instant Word Spawning</strong> - Words now spawn immediately after typing correctly instead of waiting for the previous word to leave the screen. This creates a much faster, more responsive gameplay flow.</li>
+                    </ul>
+
+                    <h3>🔧 Bug Fixes</h3>
+                    <ul>
+                        <li><strong>Combo Math Fixed</strong> - Fixed bug where purchasing Rocket Thrusters or Main Engine would incorrectly alter your current multiplier. Your multiplier value now stays constant when buying these upgrades.</li>
+                        <li><strong>Sentence Word Source</strong> - Fixed sentences pulling from regular word banks instead of the dedicated sentences JSON file. Sentences now properly use phrase data from words-sentences.json.</li>
+                        <li><strong>Overlapping Messages</strong> - Fixed "MAX X.X×!" message overlaying the "+$ amount" text. MAX message now appears with a slight delay to prevent overlap.</li>
+                    </ul>
+
+                    <h3>✨ Quality of Life</h3>
+                    <ul>
+                        <li>Improved multiplier preservation logic when upgrading combo-affecting items</li>
+                        <li>Better sentence detection and loading from JSON data</li>
+                        <li>Smoother visual feedback timing</li>
+                    </ul>
+                </div>
+            </article>
+
             <article class="devlog-entry" data-version="1.11">
                 <header class="devlog-header">
                     <span class="devlog-game">Star Typer</span>
@@ -263,7 +296,7 @@
                         <li><strong>Rebalanced Costs</strong> - Complete rebalancing of all upgrade and skill costs to match new economy.</li>
                     </ul>
 
-                    <h3>🏗️ Technical Improvements</h3>
+                    <h3>🗂️ Technical Improvements</h3>
                     <ul>
                         <li><strong>Modular JavaScript</strong> - Split script.js into 12 focused files: config, state, dom, calculations, ui, skills, upgrades, save, words, effects, modals, and main.</li>
                         <li><strong>Modular CSS</strong> - Split styles.css into 11 organized files: variables, base, header, layout, cards, play-area, skills-shop, buttons, modals, effects, and responsive.</li>
