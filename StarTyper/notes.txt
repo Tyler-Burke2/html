@@ -36,6 +36,10 @@ Fix combo math because when you buy combo upgrades, it changes what the combo is
 Sentences don't appear when the upgrade is bought. It isn't accessing the sentences word bank; instead showing regular words
 
 keep the speed of the animation the same
+~~
+Version 1.13
+
+Sentences aren't working still
 
 ---------------
 
@@ -43,12 +47,14 @@ Version 1.2
 
 Mobile support
 Pause button (esc)
-Regular words are asteroids, golden words are UFOs,
-Change the theme of the game slightly: rocketship on the right and you have to destroy the asteroids and ufos before they hit the rocket.
+punctuation skill
 
 ---------------
 
 Version 1.3
+
+Regular words are asteroids, golden words are UFOs,
+Change the theme of the game slightly: rocketship on the right and you have to destroy the asteroids and ufos before they hit the rocket.
 
 ---------------
 

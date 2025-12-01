@@ -12,12 +12,35 @@ async function loadWords() {
       const response = await fetch(filename, { cache: "no-store" });
       if (!response.ok) throw new Error('fetch fail');
       const data = await response.json();
-      state.words[bank] = Array.isArray(data.words) && data.words.length 
-        ? data.words.slice() 
-        : DEFAULT_WORDS.slice();
+      
+      console.log(`Loaded ${bank}:`, data); // Debug: see what we got
+      
+      // Special handling for sentences.json which uses "sentences" key
+      if (bank === 'sentences' && Array.isArray(data.sentences) && data.sentences.length > 0) {
+        state.words[bank] = data.sentences.slice();
+        console.log(`${bank} loaded successfully:`, state.words[bank].length, 'items');
+      } else if (Array.isArray(data.words) && data.words.length > 0) {
+        state.words[bank] = data.words.slice();
+        console.log(`${bank} loaded successfully:`, state.words[bank].length, 'items');
+      } else if (Array.isArray(data) && data.length > 0) {
+        // Maybe the JSON is just an array, not {words: [...]}
+        state.words[bank] = data.slice();
+        console.log(`${bank} loaded as array:`, state.words[bank].length, 'items');
+      } else {
+        throw new Error('Invalid data format');
+      }
     } catch(e) {
-      console.warn(`Failed to load ${bank} words, using defaults`, e);
-      state.words[bank] = DEFAULT_WORDS.slice();
+      console.warn(`Failed to load ${bank} words:`, e);
+      // Only use defaults for non-sentence banks
+      if (bank === 'sentences') {
+        state.words[bank] = [
+          "The quick brown fox jumps over the lazy dog",
+          "Pack my box with five dozen liquor jugs",
+          "How vexingly quick daft zebras jump"
+        ];
+      } else {
+        state.words[bank] = DEFAULT_WORDS.slice();
+      }
     }
   }
 }
@@ -34,10 +57,15 @@ async function spawnWord() {
   // FIX #4: Sentences should use words-sentences.json
   if (sentenceChance > 0 && Math.random() < sentenceChance) {
     isSentence = true;
-    const sentenceList = state.words.sentences && state.words.sentences.length 
-      ? state.words.sentences 
-      : ["The quick brown fox jumps over the lazy dog"];
-    word = sentenceList[Math.floor(Math.random() * sentenceList.length)];
+    // Check if sentences loaded properly
+    if (state.words.sentences && state.words.sentences.length > 0) {
+      word = state.words.sentences[Math.floor(Math.random() * state.words.sentences.length)];
+      console.log('Spawning sentence:', word); // Debug log
+    } else {
+      // Fallback if sentences didn't load
+      word = "The quick brown fox jumps over the lazy dog";
+      console.warn('Sentences not loaded, using fallback');
+    }
     
     playArea.classList.remove('sentence-warning');
     void playArea.offsetWidth;
@@ -94,14 +122,28 @@ async function spawnWord() {
   el.style.top = '50%';
   el.style.transform = 'translateY(-50%)';
 
+  // NEW SYSTEM: Left edge takes WORD_DURATION_MS to reach left edge,
+  // then continues at same speed until right edge is off screen
   const startLeft = areaWidth;
-  const endLeft = -measuredWidth - 8;
+  const leftEdgeTarget = 0; // Left edge of play area
+  
+  // Calculate speed: distance the left edge travels / time
+  const distanceForLeftEdge = areaWidth; // From right edge to left edge
+  const speed = distanceForLeftEdge / WORD_DURATION_MS; // pixels per millisecond
+  
+  // Total distance = left edge travel + word width (so right edge clears screen)
+  const totalDistance = areaWidth + measuredWidth;
+  
+  // Total time = total distance / speed
+  const totalDuration = totalDistance / speed;
+  
+  const endLeft = -measuredWidth; // Right edge is off screen
 
   const anim = el.animate([
     { left: startLeft + 'px' },
     { left: endLeft + 'px' }
   ], {
-    duration: WORD_DURATION_MS,
+    duration: totalDuration,
     easing: 'linear',
     fill: 'forwards'
   });
