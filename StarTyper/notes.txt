@@ -36,7 +36,7 @@ Fix combo math because when you buy combo upgrades, it changes what the combo is
 Sentences don't appear when the upgrade is bought. It isn't accessing the sentences word bank; instead showing regular words
 
 keep the speed of the animation the same
-~~
+~~~~
 Version 1.13
 
 Sentences aren't working still

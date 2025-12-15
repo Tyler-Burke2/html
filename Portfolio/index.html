@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Computer Science</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="project1.html">Python Project</a></li>
+            <li><a href="project2.html">Web Project</a></li>
+            <li><a href="project3.html">C# Project</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <h1>John Doe</h1>
+            <p>Computer Science Student | Software Developer</p>
+            <p>Building innovative solutions with code</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="openResumeModal()">View Resume</button>
+                <a href="#" class="btn btn-secondary" onclick="downloadResume(); return false;">Download Resume</a>
+                <a href="#contact" class="btn btn-secondary">Contact Me</a>
+            </div>
+            <div class="social-links">
+                <a href="https://linkedin.com" target="_blank" class="social-link">
+                    <span>🔗</span> LinkedIn
+                </a>
+            </div>
+        </div>
+
+        <div class="projects-grid">
+            <a href="project1.html" class="project-card">
+                <div class="project-icon">🐍</div>
+                <h3>Python Data Analysis Tool</h3>
+                <p>A powerful data visualization and analysis application built with Python</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">Matplotlib</span>
+                </div>
+            </a>
+
+            <a href="project2.html" class="project-card">
+                <div class="project-icon">🌐</div>
+                <h3>Interactive Web Application</h3>
+                <p>A responsive web app with dynamic features and modern design</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+            </a>
+
+            <a href="project3.html" class="project-card">
+                <div class="project-icon">⚡</div>
+                <h3>C# Desktop Application</h3>
+                <p>A feature-rich desktop application with robust functionality</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">.NET</span>
+                    <span class="tech-tag">WPF</span>
+                </div>
+            </a>
+        </div>
+
+        <div id="contact" class="contact-form">
+            <h2 style="text-align: center; color: var(--accent-dark); margin-bottom: 1.5rem;">Get In Touch</h2>
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Resume Modal -->
+    <div id="resumeModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeResumeModal()">&times;</button>
+            <h2 style="color: var(--accent-dark); margin-bottom: 1rem;">Resume</h2>
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <a href="#" class="btn btn-primary" onclick="downloadResume(); return false;">Download PDF</a>
+            </div>
+            
+            <div class="resume-content">
+                <div class="resume-section">
+                    <h3>Education</h3>
+                    <p><strong>Bachelor of Science in Computer Science</strong></p>
+                    <p>University Name | Expected Graduation: May 2026</p>
+                    <p>GPA: 3.8/4.0</p>
+                </div>
+
+                <div class="resume-section">
+                    <h3>Technical Skills</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">.NET</span>
+                        <span class="tech-tag">Git</span>
+                        <span class="tech-tag">Data Structures</span>
+                        <span class="tech-tag">Algorithms</span>
+                    </div>
+                </div>
+
+                <div class="resume-section">
+                    <h3>Projects</h3>
+                    <p><strong>Python Data Analysis Tool</strong></p>
+                    <p>Developed a comprehensive tool for data visualization and statistical analysis using Python, Pandas, and Matplotlib.</p>
+                    <br>
+                    <p><strong>Interactive Web Application</strong></p>
+                    <p>Built a responsive web application with HTML, CSS, and JavaScript featuring dynamic content loading.</p>
+                    <br>
+                    <p><strong>C# Desktop Application</strong></p>
+                    <p>Created a full-featured desktop application using C#, .NET, and WPF with database integration.</p>
+                </div>
+
+                <div class="resume-section">
+                    <h3>Experience</h3>
+                    <p><strong>Software Development Intern</strong></p>
+                    <p>Company Name | Summer 2024</p>
+                    <p>Collaborated on development of enterprise software solutions, participated in code reviews, and implemented new features.</p>
+                </div>
+
+                <div class="resume-section">
+                    <h3>Achievements</h3>
+                    <ul style="margin-left: 2rem; color: var(--text-secondary);">
+                        <li>Dean's List - Fall 2023, Spring 2024</li>
+                        <li>Hackathon Winner - University Tech Competition 2024</li>
+                        <li>Member of Computer Science Club</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 John Doe. All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
