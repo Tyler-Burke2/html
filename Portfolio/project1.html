@@ -19,40 +19,45 @@
     <div class="container">
         <div class="project-detail">
             <a href="index.html" class="back-btn">← Back to Home</a>
-            <h2>Python Data Analysis Tool</h2>
+            <h2>Snake Game Recreation</h2>
             <div class="content">
                 <div class="project-icon" style="font-size: 5rem; text-align: center;">🐍</div>
                 
                 <h3>Project Overview</h3>
-                <p>This project is a comprehensive data analysis and visualization tool built entirely in Python. It allows users to import datasets, perform statistical analysis, and generate insightful visualizations with just a few clicks.</p>
+                <p>A complete recreation of the classic Snake game built entirely in Python. This project features smooth gameplay, score tracking, sound effects, and polished start/end screens for a complete gaming experience.</p>
+
+                <h3>Gameplay Demo</h3>
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 2rem 0;">
+                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px;" src="https://www.youtube.com/embed/-bm6ZA2-iR8" title="Snake Game Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
 
                 <h3>Key Features</h3>
                 <ul style="margin-left: 2rem; color: var(--text-secondary);">
-                    <li>Import CSV and Excel files seamlessly</li>
-                    <li>Automated data cleaning and preprocessing</li>
-                    <li>Interactive charts and graphs using Matplotlib and Seaborn</li>
-                    <li>Statistical analysis including correlation matrices and regression models</li>
-                    <li>Export results to various formats (PDF, PNG, HTML)</li>
+                    <li>Classic Snake gameplay mechanics with smooth controls</li>
+                    <li>High score tracking system that persists between sessions</li>
+                    <li>Custom sound effects for an immersive experience</li>
+                    <li>Professional start screen and end screen with game over states</li>
+                    <li>Clean, modular code structure across 150 lines</li>
                 </ul>
 
                 <h3>Technologies Used</h3>
                 <div class="tech-tags">
-                    <span class="tech-tag">Python 3.10</span>
-                    <span class="tech-tag">Pandas</span>
-                    <span class="tech-tag">NumPy</span>
-                    <span class="tech-tag">Matplotlib</span>
-                    <span class="tech-tag">Seaborn</span>
-                    <span class="tech-tag">Scikit-learn</span>
+                    <span class="tech-tag">Python 3</span>
+                    <span class="tech-tag">Pygame</span>
+                    <span class="tech-tag">Random Module</span>
                 </div>
 
                 <h3>Challenges & Solutions</h3>
-                <p>One of the main challenges was handling large datasets efficiently. I implemented chunking and lazy loading techniques to ensure smooth performance even with files containing millions of rows.</p>
+                <p>The biggest challenge was implementing the high score logging system. I had to learn how to properly read from and write to files in Python, ensuring that scores were saved correctly between game sessions without corrupting the data. This involved error handling for cases where the score file didn't exist yet and proper file management to prevent data loss.</p>
 
-                <h3>Results & Impact</h3>
-                <p>This tool has been used by fellow students and researchers to analyze datasets for various academic projects, reducing analysis time by approximately 60% compared to manual methods.</p>
+                <h3>Technical Implementation</h3>
+                <p>The game was built using Pygame for graphics and input handling, with the Random module for generating food positions. I structured the code to be modular and maintainable, implementing separate functions for game logic, rendering, and score management.</p>
+
+                <h3>Results & Learning</h3>
+                <p>This solo project strengthened my understanding of game development fundamentals, file I/O operations, and event-driven programming. It demonstrates my ability to take a concept and build a complete, polished application from scratch.</p>
 
                 <h3>View Code</h3>
-                <a href="https://github.com" target="_blank" class="btn btn-primary">View on GitHub</a>
+                <a href="https://github.com/Tyler-Burke2/CSE-110--Intro-to-Programming-/blob/main/finalsnake.py" target="_blank" class="btn btn-primary">View on GitHub</a>
             </div>
         </div>
     </div>

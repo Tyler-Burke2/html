@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C# Project - Portfolio</title>
     <link rel="stylesheet" href="css/styles.css">
@@ -20,44 +19,51 @@
     <div class="container">
         <div class="project-detail">
             <a href="index.html" class="back-btn">← Back to Home</a>
-            <h2>C# Desktop Application</h2>
+            <h2>Gamified Goal Tracker</h2>
             <div class="content">
                 <div class="project-icon" style="font-size: 5rem; text-align: center;">⚡</div>
                 
                 <h3>Project Overview</h3>
-                <p>A robust desktop application built with C# and .NET Framework. This project demonstrates object-oriented programming principles, MVVM architecture, and modern Windows application development.</p>
+                <p>A console-based goal tracking application built in C# that transforms personal development into an engaging game. The application uses a point system to motivate users as they set, track, and accomplish their goals, making productivity rewarding and fun.</p>
+
+                <h3>Application Demo</h3>
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 2rem 0;">
+                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px;" src="https://www.youtube.com/embed/Bv_1eQt5kIc" title="Goal Tracker Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
 
                 <h3>Key Features</h3>
                 <ul style="margin-left: 2rem; color: var(--text-secondary);">
-                    <li>Intuitive WPF-based user interface</li>
-                    <li>Database integration with Entity Framework</li>
-                    <li>Real-time data synchronization</li>
-                    <li>User authentication and authorization</li>
-                    <li>Export functionality to multiple formats</li>
-                    <li>Automated backup system</li>
+                    <li>Three distinct goal types to accommodate different achievement styles</li>
+                    <li>Point-based gamification system that rewards goal completion</li>
+                    <li>Save and load functionality to persist goals between sessions</li>
+                    <li>Clean, intuitive console interface for easy navigation</li>
+                    <li>Track progress across multiple goals simultaneously</li>
+                    <li>Motivational feedback through point accumulation</li>
                 </ul>
 
                 <h3>Technologies Used</h3>
                 <div class="tech-tags">
-                    <span class="tech-tag">C# 10</span>
-                    <span class="tech-tag">.NET 6</span>
-                    <span class="tech-tag">WPF</span>
-                    <span class="tech-tag">Entity Framework</span>
-                    <span class="tech-tag">SQL Server</span>
-                    <span class="tech-tag">MVVM Pattern</span>
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">.NET</span>
+                    <span class="tech-tag">Object-Oriented Programming</span>
+                    <span class="tech-tag">File I/O</span>
+                    <span class="tech-tag">Polymorphism</span>
                 </div>
 
-                <h3>Architecture</h3>
-                <p>The application follows the MVVM (Model-View-ViewModel) pattern to ensure clean separation of concerns. This architecture makes the codebase maintainable, testable, and scalable.</p>
+                <h3>Challenges & Solutions</h3>
+                <p>The biggest challenge was implementing polymorphism effectively to handle the three different goal types. Each goal type needed to behave differently while sharing common functionality. I designed a class hierarchy with a base Goal class and derived classes for each goal type, utilizing inheritance and method overriding to achieve clean, maintainable code. This approach allowed each goal type to have its own unique behavior for recording completion and calculating points while sharing common properties and methods.</p>
 
-                <h3>Database Design</h3>
-                <p>Implemented a normalized database schema using Entity Framework Code-First approach. The application efficiently handles complex relationships and ensures data integrity through proper constraint implementation.</p>
+                <h3>Object-Oriented Design</h3>
+                <p>The application demonstrates strong object-oriented programming principles throughout its 300 lines of code. The architecture uses abstraction to define goal behaviors, encapsulation to protect data integrity, inheritance to promote code reuse, and polymorphism to enable flexible goal type handling. This design makes the codebase extensible—adding new goal types would require minimal changes to existing code.</p>
 
-                <h3>Future Enhancements</h3>
-                <p>Planning to add cloud synchronization capabilities and develop a companion mobile app for cross-platform functionality.</p>
+                <h3>Technical Implementation</h3>
+                <p>Built as a solo project, the application uses file I/O to serialize and deserialize goal data, ensuring user progress persists across sessions. The console interface provides clear menu-driven navigation, making it easy for users to create goals, record completions, and view their total points.</p>
+
+                <h3>Results & Learning</h3>
+                <p>This project strengthened my understanding of advanced C# concepts, particularly polymorphism and class design. It demonstrates my ability to apply object-oriented principles to solve real-world problems and create applications with clean, maintainable architectures. The gamification aspect shows creative thinking in making productivity tools more engaging.</p>
 
                 <h3>View Code</h3>
-                <a href="https://github.com" target="_blank" class="btn btn-primary">View on GitHub</a>
+                <a href="https://github.com/Tyler-Burke2/cse210-projects/tree/main/prove/Develop05" target="_blank" class="btn btn-primary">View on GitHub</a>
             </div>
         </div>
     </div>
