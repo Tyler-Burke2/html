@@ -1,7 +1,24 @@
 function handleSubmit(event) {
     event.preventDefault();
-    alert('Thank you for your message! I will get back to you soon.');
-    event.target.reset();
+    
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    
+    // Create mailto link with form data
+    const subject = encodeURIComponent('Portfolio Contact Form');
+    const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+    );
+    
+    // Open email client
+    window.location.href = `mailto:tylerburke891@gmail.com?subject=${subject}&body=${body}`;
+    
+    // Reset form after a short delay
+    setTimeout(() => {
+        event.target.reset();
+    }, 100);
 }
 
 function openResumeModal() {
@@ -16,7 +33,15 @@ function closeResumeModal() {
 }
 
 function downloadResume() {
-    alert('Resume download started! (In a real implementation, this would download a PDF file)');
+    // Create a temporary link element
+    const link = document.createElement('a');
+    link.href = 'UpdatedResume.pdf';
+    link.download = 'Tyler_Burke_Resume.pdf';
+    
+    // Trigger the download
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 // Close modal when clicking outside
