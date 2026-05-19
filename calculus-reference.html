@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+ 
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculus Exam Reference</title>
+    <style>
+      body {
+        font-family: "Times New Roman", serif;
+        max-width: 8.5in;
+        margin: 0 auto;
+        padding: 0.4in;
+        font-size: 10pt;
+        line-height: 1.2;
+      }
+      h1 {
+        text-align: center;
+        font-size: 16pt;
+        margin: 8px 0;
+        border-bottom: 2px solid black;
+      }
+      h2 {
+        font-size: 13pt;
+        margin: 12px 0 6px 0;
+        border-bottom: 1px solid black;
+      }
+      h3 {
+        font-size: 11pt;
+        margin: 8px 0 4px 0;
+        font-weight: bold;
+      }
+      .section {
+        margin-bottom: 10px;
+      }
+      .formula {
+        background: #f5f5f5;
+        padding: 4px 8px;
+        margin: 4px 0;
+        border-left: 3px solid #333;
+      }
+      .example {
+        margin-left: 20px;
+        color: #222;
+        font-size: 9.5pt;
+      }
+      hr {
+        border: none;
+        border-top: 1px solid #999;
+        margin: 12px 0;
+      }
+      .fraction {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+      }
+      .fraction > span {
+        display: block;
+        padding: 1px 3px;
+      }
+      .fraction .top {
+        border-bottom: 1px solid black;
+      }
+      sup {
+        font-size: 0.75em;
+        vertical-align: super;
+      }
+      sub {
+        font-size: 0.75em;
+        vertical-align: sub;
+      }
+      @media print {
+        body {
+          margin: 0.3in;
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+     
+    <h1>CALCULUS EXAM REFERENCE</h1>
+     
+    <h2>UNIT 1: LIMITS</h2>
+     
+    <div class="section">
+      <h3>Reading Limits from Graphs</h3>
+      <p>
+        Look at <i>y</i>-value as <i>x</i> approaches target. Both sides same →
+        limit exists. Different → DNE.
+      </p>
+      <div class="example">
+        <b>Ex:</b> lim<sub><i>x</i>→3</sub> <i>h</i>(<i>x</i>) = −2
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Direct Substitution</h3>
+      <p>Plug in the value. If you get a number, done.</p>
+      <div class="example">
+        <b>Ex:</b> lim<sub><i>x</i>→−3</sub>
+        <span class="fraction"
+          ><span class="top"><i>z</i>²−6<i>z</i>+5</span
+          ><span class="bottom">3<i>z</i>+6</span></span
+        >
+        =
+        <span class="fraction"
+          ><span class="top">32</span><span class="bottom">−3</span></span
+        >
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Indeterminate Forms (0/0)</h3>
+      <p>Factor and cancel, or simplify algebraically</p>
+      <div class="example">
+        <b>Ex:</b> lim<sub><i>x</i>→2</sub>
+        <span class="fraction"
+          ><span class="top"><i>x</i>²−4</span
+          ><span class="bottom"><i>x</i>−2</span></span
+        >
+        = lim<sub><i>x</i>→2</sub> (<i>x</i>+2) = 4
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Limits at Infinity (Polynomials)</h3>
+      <p>
+        Compare highest power: deg(top) > deg(bottom) → ±∞ | deg(top) =
+        deg(bottom) → ratio of coefficients | deg(top) < deg(bottom) → 0
+      </p>
+      <div class="example">
+        <b>Ex:</b> lim<sub><i>x</i>→∞</sub>
+        <span class="fraction"
+          ><span class="top">4<i>x</i>³+6<i>x</i>−18</span
+          ><span class="bottom"><i>x</i>³+16<i>x</i>+21</span></span
+        >
+        =
+        <span class="fraction"
+          ><span class="top">4</span><span class="bottom">1</span></span
+        >
+        = 4
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Exponentials at Infinity</h3>
+      <p><i>e</i><sup>−∞</sup> = 0, <i>e</i><sup>∞</sup> = ∞</p>
+      <div class="example">
+        <b>Ex:</b> <i>f</i>(<i>x</i>) = 5<i>e</i><sup>−<i>x</i>/25</sup>,
+        lim<sub><i>x</i>→∞</sub> <i>f</i>(<i>x</i>) = 0
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Continuity</h3>
+      <p>
+        Need: (1) <i>f</i>(<i>c</i>) exists (2) lim<sub><i>x</i>→<i>c</i></sub>
+        <i>f</i>(<i>x</i>) exists (3) lim<sub><i>x</i>→<i>c</i></sub>
+        <i>f</i>(<i>x</i>) = <i>f</i>(<i>c</i>)
+      </p>
+      <p><b>Piecewise:</b> Set pieces equal at boundary, solve for <i>k</i></p>
+    </div>
+     
+    <div class="section">
+      <h3>Average Rate of Change</h3>
+      <div class="formula">
+        <i>m</i><sub>avg</sub> =
+        <span class="fraction"
+          ><span class="top"><i>f</i>(<i>b</i>)−<i>f</i>(<i>a</i>)</span
+          ><span class="bottom"><i>b</i>−<i>a</i></span></span
+        >
+      </div>
+    </div>
+     
+    <hr />
+     
+    <h2>UNIT 2: DERIVATIVES</h2>
+     
+    <div class="section">
+      <h3>Limit Definition</h3>
+      <div class="formula">
+        <i>f</i>'(<i>x</i>) = lim<sub><i>h</i>→0</sub>
+        <span class="fraction"
+          ><span class="top"
+            ><i>f</i>(<i>x</i>+<i>h</i>)−<i>f</i>(<i>x</i>)</span
+          ><span class="bottom"><i>h</i></span></span
+        >
+      </div>
+      <p>
+        <b>Steps:</b> (1) Find <i>f</i>(<i>x</i>+<i>h</i>) (2) Subtract
+        <i>f</i>(<i>x</i>) (3) Divide by <i>h</i> (4) Simplify/cancel
+        <i>h</i> (5) lim as <i>h</i>→0
+      </p>
+      <div class="example">
+        <b>Ex:</b> <i>f</i>(<i>x</i>) = √(<i>x</i>+1) → <i>f</i>'(<i>x</i>) =
+        <span class="fraction"
+          ><span class="top">1</span
+          ><span class="bottom">2√(<i>x</i>+1)</span></span
+        >
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Power Rule</h3>
+      <div class="formula">
+        <span class="fraction"
+          ><span class="top"><i>d</i></span
+          ><span class="bottom"><i>dx</i></span></span
+        >[<i>x</i><sup><i>n</i></sup
+        >] = <i>n</i><i>x</i><sup><i>n</i>−1</sup>
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Product Rule</h3>
+      <div class="formula">
+        <span class="fraction"
+          ><span class="top"><i>d</i></span
+          ><span class="bottom"><i>dx</i></span></span
+        >[<i>fg</i>] = <i>f</i>'<i>g</i> + <i>fg</i>'
+      </div>
+      <div class="example">
+        <b>Ex:</b> 2cos(<i>x</i>)sin(<i>x</i>) → −2sin²(<i>x</i>) +
+        2cos²(<i>x</i>)
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Quotient Rule</h3>
+      <div class="formula">
+        <span class="fraction"
+          ><span class="top"><i>d</i></span
+          ><span class="bottom"><i>dx</i></span></span
+        >[<span class="fraction"
+          ><span class="top"><i>f</i></span
+          ><span class="bottom"><i>g</i></span></span
+        >] =
+        <span class="fraction"
+          ><span class="top"><i>f</i>'<i>g</i>−<i>fg</i>'</span
+          ><span class="bottom"><i>g</i>²</span></span
+        >
+      </div>
+      <p>"Low d-high minus high d-low, square below"</p>
+    </div>
+     
+    <div class="section">
+      <h3>Chain Rule</h3>
+      <div class="formula">
+        <span class="fraction"
+          ><span class="top"><i>d</i></span
+          ><span class="bottom"><i>dx</i></span></span
+        >[<i>f</i>(<i>g</i>(<i>x</i>))] =
+        <i>f</i>'(<i>g</i>(<i>x</i>))·<i>g</i>'(<i>x</i>)
+      </div>
+      <div class="example">
+        <b>Ex:</b> (3<i>x</i>+1)⁵ → 5(3<i>x</i>+1)⁴·3 = 15(3<i>x</i>+1)⁴
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Common Derivatives</h3>
+      <p>
+        sin(<i>x</i>) → cos(<i>x</i>) | cos(<i>x</i>) → −sin(<i>x</i>) |
+        tan(<i>x</i>) → sec²(<i>x</i>) | <i>e</i><sup><i>x</i></sup> → <i>e</i
+        ><sup><i>x</i></sup> | ln(<i>x</i>) →
+        <span class="fraction"
+          ><span class="top">1</span><span class="bottom"><i>x</i></span></span
+        >
+      </p>
+      <p>
+        <i>e</i><sup><i>f</i>(<i>x</i>)</sup> → <i>e</i
+        ><sup><i>f</i>(<i>x</i>)</sup>·<i>f</i>'(<i>x</i>) |
+        ln(<i>f</i>(<i>x</i>)) →
+        <span class="fraction"
+          ><span class="top"><i>f</i>'(<i>x</i>)</span
+          ><span class="bottom"><i>f</i>(<i>x</i>)</span></span
+        >
+        | <i>a</i><sup><i>x</i></sup> → <i>a</i><sup><i>x</i></sup
+        >ln(<i>a</i>)
+      </p>
+    </div>
+     
+    <div class="section">
+      <h3>Logarithmic Differentiation</h3>
+      <p>
+        For <i>y</i> = [stuff]<sup>[stuff]</sup>: ln(<i>y</i>) = ln(RHS),
+        simplify, differentiate,
+        <span class="fraction"
+          ><span class="top"><i>y</i>'</span
+          ><span class="bottom"><i>y</i></span></span
+        >
+        = result, <i>y</i>' = <i>y</i>·result
+      </p>
+      <div class="example">
+        <b>Ex:</b> <i>y</i> = (5−4<i>x</i>³)<sup><i>x</i></sup> → ln(<i>y</i>) =
+        <i>x</i>ln(5−4<i>x</i>³) → <i>y</i>' = (5−4<i>x</i>³)<sup><i>x</i></sup
+        >[ln(5−4<i>x</i>³) −
+        <span class="fraction"
+          ><span class="top">12<i>x</i>³</span
+          ><span class="bottom">5−4<i>x</i>³</span></span
+        >]
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Implicit Differentiation</h3>
+      <p>
+        (1) Differentiate both sides w.r.t. <i>x</i> (2) Each <i>y</i> gets
+        <span class="fraction"
+          ><span class="top"><i>dy</i></span
+          ><span class="bottom"><i>dx</i></span></span
+        >
+        (3) Collect terms (4) Solve for
+        <span class="fraction"
+          ><span class="top"><i>dy</i></span
+          ><span class="bottom"><i>dx</i></span></span
+        >
+      </p>
+      <div class="example">
+        <b>Ex:</b> <i>x</i>² + <i>y</i>² = 25 → 2<i>x</i> + 2<i>y</i>(<span
+          class="fraction"
+          ><span class="top"><i>dy</i></span
+          ><span class="bottom"><i>dx</i></span></span
+        >) = 0 →
+        <span class="fraction"
+          ><span class="top"><i>dy</i></span
+          ><span class="bottom"><i>dx</i></span></span
+        >
+        = −<span class="fraction"
+          ><span class="top"><i>x</i></span
+          ><span class="bottom"><i>y</i></span></span
+        >
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Related Rates</h3>
+      <p>
+        (1) Equation relating variables (2) Differentiate w.r.t. <i>t</i> (3)
+        Plug in known (4) Solve for unknown rate
+      </p>
+      <div class="example">
+        <b>Ex (Cube):</b> <i>V</i> = <i>s</i>³,
+        <span class="fraction"
+          ><span class="top"><i>dV</i></span
+          ><span class="bottom"><i>dt</i></span></span
+        >
+        = 48, <i>s</i> = 15<br />
+        <span class="fraction"
+          ><span class="top"><i>dV</i></span
+          ><span class="bottom"><i>dt</i></span></span
+        >
+        = 3<i>s</i>²<span class="fraction"
+          ><span class="top"><i>ds</i></span
+          ><span class="bottom"><i>dt</i></span></span
+        >
+        → 48 = 675<span class="fraction"
+          ><span class="top"><i>ds</i></span
+          ><span class="bottom"><i>dt</i></span></span
+        >
+        →
+        <span class="fraction"
+          ><span class="top"><i>ds</i></span
+          ><span class="bottom"><i>dt</i></span></span
+        >
+        = 0.0711
+      </div>
+      <div class="example">
+        <b>Ex (Cylinder):</b> <i>V</i> = π<i>r</i>²<i>h</i>, <i>r</i> = 30
+        (constant),
+        <span class="fraction"
+          ><span class="top"><i>dh</i></span
+          ><span class="bottom"><i>dt</i></span></span
+        >
+        = 560<br />
+        <span class="fraction"
+          ><span class="top"><i>dV</i></span
+          ><span class="bottom"><i>dt</i></span></span
+        >
+        = π<i>r</i>²<span class="fraction"
+          ><span class="top"><i>dh</i></span
+          ><span class="bottom"><i>dt</i></span></span
+        >
+        = π(30)²(560) = 1,583,362.7
+      </div>
+    </div>
+     
+    <hr />
+     
+    <h2>UNIT 3: THEORY OF DERIVATIVES</h2>
+     
+    <div class="section">
+      <h3>Critical Points</h3>
+      <div class="formula">
+        <i>f</i>'(<i>x</i>) = 0 &nbsp; or &nbsp; <i>f</i>'(<i>x</i>) undefined
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>First Derivative Test</h3>
+      <p>Test sign of <i>f</i>'(<i>x</i>) around critical point <i>c</i>:</p>
+      <p style="font-family: monospace; font-size: 9pt">
+        + + + | - - - → local MAX<br />
+        - - - | + + + → local MIN<br />
+        + + + | + + + → neither
+      </p>
+    </div>
+     
+    <div class="section">
+      <h3>Second Derivative Test</h3>
+      <p>At critical point <i>c</i> where <i>f</i>'(<i>c</i>) = 0:</p>
+      <p>
+        <i>f</i>''(<i>c</i>) > 0 → local MIN (∪) | <i>f</i>''(<i>c</i>) < 0 →
+        local MAX (∩) | <i>f</i>''(<i>c</i>) = 0 → inconclusive
+      </p>
+      <div class="example">
+        <b>Ex:</b> <i>f</i>(<i>x</i>) =
+        <span class="fraction"
+          ><span class="top">2(<i>x</i>−4)²</span
+          ><span class="bottom"><i>x</i>+6</span></span
+        >
+        → Find <i>f</i>'(<i>x</i>) = 0, then test <i>f</i>''(critical points)
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Concavity</h3>
+      <p>
+        <b><i>f</i>''(<i>x</i>) > 0</b> → concave up ∪ |
+        <b><i>f</i>''(<i>x</i>) < 0</b> → concave down ∩
+      </p>
+      <p><b>Inflection:</b> <i>f</i>''(<i>x</i>) = 0 AND sign change</p>
+    </div>
+     
+    <div class="section">
+      <h3>L'Hôpital's Rule</h3>
+      <p>
+        <b>Use when:</b>
+        <span class="fraction"
+          ><span class="top">0</span><span class="bottom">0</span></span
+        >
+        or
+        <span class="fraction"
+          ><span class="top">∞</span><span class="bottom">∞</span></span
+        >
+      </p>
+      <div class="formula">
+        lim
+        <span class="fraction"
+          ><span class="top"><i>f</i>(<i>x</i>)</span
+          ><span class="bottom"><i>g</i>(<i>x</i>)</span></span
+        >
+        = lim
+        <span class="fraction"
+          ><span class="top"><i>f</i>'(<i>x</i>)</span
+          ><span class="bottom"><i>g</i>'(<i>x</i>)</span></span
+        >
+      </div>
+      <p>Differentiate top and bottom SEPARATELY</p>
+      <div class="example">
+        <b>Ex:</b> lim<sub><i>x</i>→1</sub>
+        <span class="fraction"
+          ><span class="top">3ln(<i>x</i>)</span
+          ><span class="bottom"><i>x</i>−1</span></span
+        >
+        =
+        <span class="fraction"
+          ><span class="top">0</span><span class="bottom">0</span></span
+        >
+        → lim<sub><i>x</i>→1</sub>
+        <span class="fraction"
+          ><span class="top">3/<i>x</i></span
+          ><span class="bottom">1</span></span
+        >
+        = 3
+      </div>
+      <div class="example">
+        <b>Ex:</b> lim<sub><i>x</i>→12</sub> [<span class="fraction"
+          ><span class="top">96</span
+          ><span class="bottom">4<i>x</i>²−64<i>x</i>+192</span></span
+        >
+        −
+        <span class="fraction"
+          ><span class="top"><i>x</i></span
+          ><span class="bottom">4<i>x</i>−48</span></span
+        >] → Combine, get
+        <span class="fraction"
+          ><span class="top">0</span><span class="bottom">0</span></span
+        >, L'H → −0.625
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Optimization</h3>
+      <p>
+        (1) Identify max/min (2) Equation <i>Q</i>(<i>x</i>) (3) Constraints →
+        one variable (4) <i>Q</i>'(<i>x</i>) = 0 (5) Test
+      </p>
+      <div class="example">
+        <b>Ex:</b> Max area under parabola: <i>A</i> = 18<i>x</i> − 2<i>x</i>³ →
+        <i>A</i>' = 18 − 6<i>x</i>² = 0 → <i>x</i> = √3
+      </div>
+    </div>
+     
+    <hr />
+     
+    <h2>UNIT 4: INTEGRALS</h2>
+     
+    <div class="section">
+      <h3>Basic Integration</h3>
+      <div class="formula">
+        ∫ <i>x</i><sup><i>n</i></sup> <i>dx</i> =
+        <span class="fraction"
+          ><span class="top"
+            ><i>x</i><sup><i>n</i>+1</sup></span
+          ><span class="bottom"><i>n</i>+1</span></span
+        >
+        + <i>C</i> &nbsp;(<i>n</i> ≠ −1)
+      </div>
+      <p>
+        ∫ 1 <i>dx</i> = <i>x</i> + <i>C</i> | ∫ <i>x</i> <i>dx</i> =
+        <span class="fraction"
+          ><span class="top"><i>x</i>²</span><span class="bottom">2</span></span
+        >
+        + <i>C</i> | ∫
+        <span class="fraction"
+          ><span class="top">1</span><span class="bottom"><i>x</i></span></span
+        >
+        <i>dx</i> = ln|<i>x</i>| + <i>C</i> | ∫ <i>e</i><sup><i>x</i></sup>
+        <i>dx</i> = <i>e</i><sup><i>x</i></sup> + <i>C</i>
+      </p>
+      <p>
+        ∫ sin(<i>x</i>) <i>dx</i> = −cos(<i>x</i>) + <i>C</i> | ∫ cos(<i>x</i>)
+        <i>dx</i> = sin(<i>x</i>) + <i>C</i> | ∫ sec²(<i>x</i>) <i>dx</i> =
+        tan(<i>x</i>) + <i>C</i>
+      </p>
+    </div>
+     
+    <div class="section">
+      <h3>Definite Integrals</h3>
+      <div class="formula">
+        ∫<sub><i>a</i></sub
+        ><sup><i>b</i></sup> <i>f</i>(<i>x</i>) <i>dx</i> = <i>F</i>(<i>b</i>) −
+        <i>F</i>(<i>a</i>)
+      </div>
+      <div class="example">
+        <b>Ex:</b> ∫<sub>0</sub><sup>2</sup> <i>x</i>² <i>dx</i> = [<span
+          class="fraction"
+          ><span class="top"><i>x</i>³</span><span class="bottom">3</span></span
+        >]<sub>0</sub><sup>2</sup> =
+        <span class="fraction"
+          ><span class="top">8</span><span class="bottom">3</span></span
+        >
+        − 0 =
+        <span class="fraction"
+          ><span class="top">8</span><span class="bottom">3</span></span
+        >
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>U-Substitution</h3>
+      <p>
+        (1) <i>u</i> = inside (2) <i>du</i> = derivative·<i>dx</i> (3) Rewrite
+        in <i>u</i> (4) Integrate (5) Substitute back
+      </p>
+      <div class="example">
+        <b>Ex:</b> ∫ 2<i>x</i>·<i>e</i><sup><i>x</i>²</sup> <i>dx</i> →
+        <i>u</i> = <i>x</i>², <i>du</i> = 2<i>x dx</i> → ∫ <i>e</i
+        ><sup><i>u</i></sup> <i>du</i> = <i>e</i><sup><i>u</i></sup> +
+        <i>C</i> = <i>e</i><sup><i>x</i>²</sup> + <i>C</i>
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Area Under Curve</h3>
+      <div class="formula">
+        <i>A</i> = ∫<sub><i>a</i></sub
+        ><sup><i>b</i></sup> <i>f</i>(<i>x</i>) <i>dx</i> &nbsp;(when
+        <i>f</i>(<i>x</i>) ≥ 0)
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Area Between Curves</h3>
+      <div class="formula">
+        <i>A</i> = ∫<sub><i>a</i></sub
+        ><sup><i>b</i></sup> [<i>f</i>(<i>x</i>) − <i>g</i>(<i>x</i>)]
+        <i>dx</i> &nbsp;(top − bottom)
+      </div>
+      <p>(1) Find intersections (2) Determine which is on top (3) Integrate</p>
+      <div class="example">
+        <b>Ex:</b> Between <i>y</i> = <i>x</i> and <i>y</i> = <i>x</i>² from 0
+        to 1<br />
+        <i>A</i> = ∫<sub>0</sub><sup>1</sup> (<i>x</i> − <i>x</i>²) <i>dx</i> =
+        [<span class="fraction"
+          ><span class="top"><i>x</i>²</span><span class="bottom">2</span></span
+        >
+        −
+        <span class="fraction"
+          ><span class="top"><i>x</i>³</span><span class="bottom">3</span></span
+        >]<sub>0</sub><sup>1</sup> =
+        <span class="fraction"
+          ><span class="top">1</span><span class="bottom">2</span></span
+        >
+        −
+        <span class="fraction"
+          ><span class="top">1</span><span class="bottom">3</span></span
+        >
+        =
+        <span class="fraction"
+          ><span class="top">1</span><span class="bottom">6</span></span
+        >
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Work</h3>
+      <div class="formula">
+        <i>W</i> = ∫<sub><i>a</i></sub
+        ><sup><i>b</i></sup> <i>F</i>(<i>x</i>) <i>dx</i>
+      </div>
+    <p><b>Basic:</b> Work = Force × Distance (when force is constant)</p>
+    <p><b>Units:</b> 1 Newton = 1 kg·m/s² | Work in Joules = Newton·meters</p>
+    <p><b>Springs (Hooke's Law):</b> <i>F</i>(<i>x</i>) = <i>kx</i>, where <i>k</i> = spring constant, <i>x</i> = displacement</p>
+    </div>
+     
+    <div class="section">
+      <h3>Volume - Disk Method</h3>
+      <div class="formula">
+        <i>V</i> = π∫<sub><i>a</i></sub
+        ><sup><i>b</i></sup> [<i>f</i>(<i>x</i>)]² <i>dx</i> &nbsp;(around
+        <i>x</i>-axis)
+      </div>
+      <div class="example">
+        <b>Ex:</b> <i>y</i> = √<i>x</i> from 0 to 4, around <i>x</i>-axis<br />
+        <i>V</i> = π∫<sub>0</sub><sup>4</sup> (√<i>x</i>)² <i>dx</i> = π∫<sub
+          >0</sub
+        ><sup>4</sup> <i>x dx</i> = π[<span class="fraction"
+          ><span class="top"><i>x</i>²</span><span class="bottom">2</span></span
+        >]<sub>0</sub><sup>4</sup> = 8π
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Volume - Washer Method</h3>
+      <div class="formula">
+        <i>V</i> = π∫<sub><i>a</i></sub
+        ><sup><i>b</i></sup> [<i>R</i>(<i>x</i>)² − <i>r</i>(<i>x</i>)²]
+        <i>dx</i>
+      </div>
+      <p><i>R</i> = outer radius, <i>r</i> = inner radius</p>
+      <div class="example">
+        <b>Ex:</b> Between <i>y</i> = <i>x</i> and <i>y</i> = <i>x</i>², around
+        <i>x</i>-axis<br />
+        <i>R</i>(<i>x</i>) = <i>x</i>, <i>r</i>(<i>x</i>) = <i>x</i>²<br />
+        <i>V</i> = π∫<sub>0</sub><sup>1</sup> (<i>x</i>² − <i>x</i>⁴)
+        <i>dx</i> = π[<span class="fraction"
+          ><span class="top"><i>x</i>³</span><span class="bottom">3</span></span
+        >
+        −
+        <span class="fraction"
+          ><span class="top"><i>x</i>⁵</span><span class="bottom">5</span></span
+        >]<sub>0</sub><sup>1</sup> =
+        <span class="fraction"
+          ><span class="top">2π</span><span class="bottom">15</span></span
+        >
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Volume - Shell Method</h3>
+      <div class="formula">
+        <i>V</i> = 2π∫<sub><i>a</i></sub
+        ><sup><i>b</i></sup> <i>x</i>·<i>f</i>(<i>x</i>) <i>dx</i> &nbsp;(around
+        <i>y</i>-axis)
+      </div>
+      <p>radius × height</p>
+      <div class="example">
+        <b>Ex:</b> <i>y</i> = <i>x</i>² from 0 to 2, around <i>y</i>-axis<br />
+        radius = <i>x</i>, height = <i>x</i>²<br />
+        <i>V</i> = 2π∫<sub>0</sub><sup>2</sup> <i>x</i>·<i>x</i>² <i>dx</i> =
+        2π∫<sub>0</sub><sup>2</sup> <i>x</i>³ <i>dx</i> = 2π[<span
+          class="fraction"
+          ><span class="top"><i>x</i>⁴</span><span class="bottom">4</span></span
+        >]<sub>0</sub><sup>2</sup> = 8π
+      </div>
+    </div>
+     
+    <div class="section">
+      <h3>Rotating Around x = k or y = k</h3>
+      <p><b>Around x = k:</b> Radius = |<i>x</i> − <i>k</i>|</p>
+      <p><b>Around y = k:</b> Radius = |<i>y</i> − <i>k</i>|</p>
+      <p>Adjust radius in formulas accordingly</p>
+    </div>
+     
+    <hr />
+     
+    <h2>QUICK REFERENCE</h2>
+     
+    <div class="section">
+      <h3>Key Shortcuts</h3>
+      <p>
+        <b>Derivative of e<sup>stuff</sup>:</b> <i>e</i><sup>stuff</sup> ×
+        d/dx[stuff]
+      </p>
+      <p>
+        <b>Derivative of ln(stuff):</b>
+        <span class="fraction"
+          ><span class="top">d/dx[stuff]</span
+          ><span class="bottom">stuff</span></span
+        >
+      </p>
+      <p>
+        <b>Product:</b> <i>f</i>'<i>g</i> + <i>fg</i>' | <b>Quotient:</b>
+        <span class="fraction"
+          ><span class="top"><i>f</i>'<i>g</i>−<i>fg</i>'</span
+          ><span class="bottom"><i>g</i>²</span></span
+        >
+        | <b>Chain:</b> outside' × inside'
+      </p>
+      <p><b>Critical Points:</b> <i>f</i>'(<i>x</i>) = 0 or undefined</p>
+      <p>
+        <b>Max/Min:</b> <i>f</i>''(<i>c</i>) < 0 is max, <i>f</i>''(<i>c</i>) >
+        0 is min
+      </p>
+      <p>
+        <b>L'Hôpital's:</b>
+        <span class="fraction"
+          ><span class="top">0</span><span class="bottom">0</span></span
+        >
+        or
+        <span class="fraction"
+          ><span class="top">∞</span><span class="bottom">∞</span></span
+        >
+        → differentiate top and bottom separately
+      </p>
+      <p>
+        <b>Area between:</b> ∫[top − bottom] | <b>Disk:</b> π∫[<i>R</i>²] |
+        <b>Washer:</b> π∫[<i>R</i>² − <i>r</i>²] | <b>Shell:</b> 2π∫[radius ×
+        height]
+      </p>
+    </div>
+     
+  </body>
+</html>
